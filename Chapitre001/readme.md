@@ -24,7 +24,7 @@ Lancer l’application, vous devez retrouver un environnement Linux avec les com
     
 Suivant la version, vous pourrez programmer en assembleur 32 (armv6, v7, v8) ou 64 bits (aarch64) (attention les instructions sont sensiblement différentes).
 
-Maintenant vérifier si le compilateur as et le linker ld sont bien installés en tapant simplement as ou ld. Si le compilateur ou le linker ne sont pas installés, installer le package binutils avec la commande :
+Maintenant vérifier si le compilateur as et le linker ld sont bien installés en tapant simplement as ou ld. Si le compilateur ou le linker ne sont pas installés, installez le package binutils avec la commande :
 ```
    pkg install binutils 
 ```
@@ -46,8 +46,8 @@ Voici un exemple du script de compilation à créer et à lancer par compil32 <n
 ```shell
 #compilation assembleur
 echo "Compilation 32 bits de "$1".s"
-as -o $1".o"   $1".s"
-ld -o $1 $1".o"  -e main --print-map >map1.txt
+as -o $1".o"   $1".s" -a >$1"list.txt"
+ld -o $1 $1".o"  -e main --print-map >$1"map.txt"
 ls -l $1*
 echo "Fin de compilation."
 ```
@@ -57,13 +57,13 @@ Et c’est le même script pour le 64 bits :
 ```shell
 #compilation assembleur
 echo "Compilation 64 bits de "$1".s"
-as -o $1".o"   $1".s" -a >$1 »list.txt »
-ld -o $1 $1".o"   -e main --print-map >$1 « map.txt »
+as -o $1".o"   $1".s" -a >$1"list.txt"
+ld -o $1 $1".o"   -e main --print-map >$1"map.txt"
 ls -l $1*  
 echo "Fin de compilation."
 ```
 
-Saisissez le petit programme pgm32_1.s (ou affText64.s pour le 64 bits) avec votre éditeur, sauvez le avec le nom pgm32_1.s, puis transférez le dans le répertoire que vous avez prévu sur le téléphone. Puis lancer la compilation en vous mettant dans le même répertoire par compil32 pgm1.
+Saisissez le petit programme pgm32_1.s (ou affText64.s pour le 64 bits) avec votre éditeur, sauvez le avec le nom pgm32_1.s, puis transférez le dans le répertoire que vous avez prévu sur le téléphone. Puis lancer la compilation en vous mettant dans le même répertoire par compil32 pgm32_1 ou compil64 affText64.
 
 Corriger les erreurs de saisie éventuelles et lancer l’exécutable par pgm32_1 ou affText64.
 
