@@ -20,13 +20,13 @@ Lancer l’application, vous devez retrouver un environnement Linux avec les com
 ```
     uname -a 
     lscpu 
-    ```
+```
     
 Suivant la version, vous pourrez programmer en assembleur 32 (armv6, v7, v8) ou 64 bits (aarch64) (attention les instructions sont sensiblement différentes).
 
 Maintenant vérifier si le compilateur as et le linker ld sont bien installés en tapant simplement as ou ld. Si le compilateur ou le linker ne sont pas installés, installer le package binutils avec la commande :
 ```
-pkg install binutils 
+   pkg install binutils 
 ```
 Vous pouvez aussi installer d’autres packages pour disposer d’autres outils qui vous sont familiers.
 
@@ -53,6 +53,7 @@ echo "Fin de compilation."
 ```
 
 Et c’est le même script pour le 64 bits :
+      
 ```shell
 #compilation assembleur
 echo "Compilation 64 bits de "$1".s"
@@ -62,9 +63,9 @@ ls -l $1*
 echo "Fin de compilation."
 ```
 
-Saisissez le petit programme pgm32_1.s (ou affText64.s pour le 64 bits) avec votre éditeur, sauvez le avec le nom pgm1.s, puis transférez le dans le répertoire que vous avez prévu sur le téléphone. Puis lancer la compilation en vous mettant dans le même répertoire par compil32 pgm1.
+Saisissez le petit programme pgm32_1.s (ou affText64.s pour le 64 bits) avec votre éditeur, sauvez le avec le nom pgm32_1.s, puis transférez le dans le répertoire que vous avez prévu sur le téléphone. Puis lancer la compilation en vous mettant dans le même répertoire par compil32 pgm1.
 
-Corriger les erreurs de saisie éventuelles et lancer l’exécutable par pgm1.
+Corriger les erreurs de saisie éventuelles et lancer l’exécutable par pgm32_1 ou affText64.
 
 Tout est ok ?  Vous êtes prêt pour la suite.
 
@@ -76,14 +77,20 @@ Maintenant, il ne vous reste plus qu’à lire la documentation Termux, celle du
 https://developer.arm.com/documentation/#sort=relevancy en fonction du processeur dont vous disposez sur votre téléphone.
 
 La programmation sur Android est identique à celle utilisée pour les raspberry pi et donc vous pouvez vous inspirer soit de mon expérience :
+      
 https://assembleurarmpi.blogspot.com/2017/10/introduction.html
+      
 soit des sites comme celui ci :
+      
 https://thinkingeek.com/arm-assembler-raspberry-pi/
 
 
 Ah !! mais vous voulez aussi utiliser une interface graphique pour afficher de belles images issues de vos programmes assembleur.
+      
 Alors il y a plusieurs solutions : soit vous voulez utiliser l’environnement graphique Android comme toutes les applications mais il faudra installer tout l’environnement de développement Android sur un ordinateur puis créer une application d’affichage java avec une interface en C avec votre programme Asm.
+      
 Je n’ai pas essayé cette solution mais voir sur internet un exemple :
+      
 https://www.eggwall.com/2011/09/android-arm-assembly-calling-assembly.html?m=1
 
 Une autre solution consiste à utiliser l’environnement graphique X11 et à installer sur le téléphone une application serveur X11.  C’est ce que j’ai fait et je détaillerai les problèmes rencontrés.
