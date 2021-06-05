@@ -1,3 +1,4 @@
+# Analyse du premier programme en 32 bits
 Reprenons le programme précédent qui a servi à effectuer le test des outils.Pour commencer à programmer en assembleur, il faut appréhender plusieurs concepts qui sont indissociables.
 
 C’est pourquoi dans ce petit programme qui n’affiche qu’un simple message, nous allons aborder les différentes parties d’un programme : les registres, la mémoire, le système d’exploitation etc.
