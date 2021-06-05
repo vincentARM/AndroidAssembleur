@@ -1,9 +1,9 @@
 # Analyse du premier programme en 32 bits
-Reprenons le programme précédent qui a servi à effectuer le test des outils.Pour commencer à programmer en assembleur, il faut appréhender plusieurs concepts qui sont indissociables.
-
+Reprenons le programme précédent qui a servi à effectuer le test des outils.
+Pour commencer à programmer en assembleur, il faut appréhender plusieurs concepts qui sont indissociables.
 C’est pourquoi dans ce petit programme qui n’affiche qu’un simple message, nous allons aborder les différentes parties d’un programme : les registres, la mémoire, le système d’exploitation etc.
 
-Les premières lignes du programmes sont des commentaires limités par les caractères * et * . les commentaires en fin de ligne sont signalés par les caractères @ ou ·
+Les premières lignes du programmes sont des commentaires limités par les caractères /* et */. les commentaires en fin de ligne sont signalés par les caractères @ ou ·
 Ensuite nous trouvons la définitions des constantes à l’aide de la pseudo instructions .equ. Une pseudo instruction est une instruction uniquement utilisé par le compilateur, ce n’est donc pas une instruction executable par le processeur.
 
 Ici le compilateur se contentera de remplacer toutes les mots EXIT par la valeur 1 avant l’assemblage des autres instructions.
