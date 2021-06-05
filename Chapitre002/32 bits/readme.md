@@ -90,6 +90,10 @@ http://www.lxhp.in-berlin.de/lhpsysc0.html
 
 Mais vous pouvez trouver les codes sur votre console termux avec la commande :
 
+```shell
+
 more /data/data/com.termux/files/usr/include/arm-linux-androideabi/asm/unistd-common.h
+
+```
 
 Si vous ne trouvez pas, chercher où se trouve le fichier unistd-common.h sur votre environnement termux.
