@@ -3,14 +3,14 @@ Reprenons le programme précédent qui a servi à effectuer le test des outils.
 Pour commencer à programmer en assembleur, il faut appréhender plusieurs concepts qui sont indissociables.
 C’est pourquoi dans ce petit programme qui n’affiche qu’un simple message, nous allons aborder les différentes parties d’un programme : les registres, la mémoire, le système d’exploitation etc.
 
-Les premières lignes du programmes sont des commentaires limités par les caractères /* et */. les commentaires en fin de ligne sont signalés par les caractères @ ou ·
-Ensuite nous trouvons la définitions des constantes à l’aide de la pseudo instructions .equ. Une pseudo instruction est une instruction uniquement utilisé par le compilateur, ce n’est donc pas une instruction executable par le processeur.
+Les premières lignes du programmes sont des commentaires limités par les caractères /* et */. Les commentaires en fin de ligne sont signalés par les caractères @ ou //·
+Ensuite nous trouvons la définition des constantes à l’aide de la pseudo instruction .equ. Une pseudo instruction est une instruction uniquement utilisée par le compilateur, ce n’est donc pas une instruction exécutable par le processeur.
 
 Ici le compilateur se contentera de remplacer toutes les mots EXIT par la valeur 1 avant l’assemblage des autres instructions.
 
 Remarque : les pseudo instructions sont précédés d’un point mais quelque unes ne le sont pas.
 
-Puis nous trouvons la pseudo instructions .data qui définit une zone de la mémoire ou section.
+Puis nous trouvons la pseudo instruction .data qui définit une zone de la mémoire ou section.
 
 Un programme assembleur décompose la place mémoire que lui attribue le système d’exploitation en zones ou sections dont l’usage et les accès sont différents. 
 Nous trouvons la .data qui contient toutes les variables initialisées par le programmeur puis une section .bss dont les variables sont initialisées à zéro par le système d’exploitation. Ces 2 sections peuvent être lues et écrites.
@@ -20,30 +20,29 @@ En fin de la mémoire autorisée, nous trouverons la zone réservée à la pile 
 
 Enfin le reste de la mémoire comprise entre la fin de la dernière section et la pile est le tas (heap).
 
-Revenons à la section .data. Elle sert à décrire les variables à utiliser et leur contenu. Chaque variable se compose d’un label ou étiquette (ici szMessage) d’une pseudo instruction qui indique le type et sa valeur. Ici nous déclarons une chaîne de caractères en ascii se terminant par zéro (le z de .asciz) et dont la valeur est « Pgm1 : Bonjour le monde. \n ». Le caractère \n indique comme en C le retour à la ligne suivante.
+Revenons à la section .data. Elle sert à décrire les variables à utiliser et leur contenu. Chaque variable se compose d’un label ou étiquette (ici szMessage) d’une pseudo instruction qui indique le type et sa valeur. Ici nous déclarons une chaîne de caractères en ascii se terminant par zéro (le z de .asciz) et dont la valeur est "Pgm1 : Bonjour le monde. \n". Le caractère \n indique comme en C le retour à la ligne suivante.
 
 Si vous regardez la liste de compilation dans le fichier  pgm32_1list.txt vous verrez que la chaîne commence par les caractères  50676D31 .
 Le label ou étiquette représentera l’adresse de la variable en mémoire dans la suite du programme.
 
 Nous pouvons déclarer en mémoire des chaînes de caractères sans le 0 final avec .ascii, des valeurs entières sur 4 octets par .int ou .word, des octets par .byte, des valeurs sur 2 octets par .hword, des valeurs sur 8 octets par .dword.
 
-
 Dans notre programme, la section suivante .bss est vide.
 
-Puis nous trouvons la section .text avec un label main : qui indique le début du code ou plus exactement l’adresse en mémoire de la première instruction exécutable. Ce label est d éclarée global pour être visible soit par d’autres modules soit par l’éditeur de liens. En effet dans le script de compilation donné au chapitre précédent, vous avez pour le linker ld la directive -e main qui lui indique que main est l’adresse de la première instruction à exécuter. 
+Puis nous trouvons la section .text avec un label main: qui indique le début du code ou plus exactement l’adresse en mémoire de la première instruction exécutable. Ce label est déclarée global pour être visible soit par d’autres modules soit par l’éditeur de liens. En effet dans le script de compilation donné au chapitre précédent, vous avez pour le linker ld la directive -e main qui lui indique que main est l’adresse de la première instruction à exécuter. 
 
 Vous pouvez dans le programme changer ce label mais il vous faudra aussi modifier le script pour indiquer au linker la nouvelle étiquette.
 Cette première instruction est ldr r0,iAdrszMessage qui charge dans le registre r0, l’adresse de la variable szMessage.
 
-L’instruction se compose d’un mnémonique  le code opération ldr, du nom d’un registre r0 comme destinataire et d’une étiquette comme source.
+L’instruction se compose d’un mnémonique le code opération ldr, du nom d’un registre r0 comme destinataire et d’une étiquette comme source. Cette etiquette sera remplacée par l'adresse mémoire correspondante.
 
 Un registre est un composant électronique élémentaire du processeur dont la taille est de 32 bits soit 4 octets. Il peut donc contenir les valeurs de 0 à 2 puissance 32 - 1 soit 4 294 967 295. Ces valeurs représentent ce que vous voulez : un nombre, une adresse, une couleur, un code ascii etc. Nous verrons plus en détail les registres au chapitre suivant.
 
-Ici nous mettons dans ce registre l’adresse du message en mémoire, adresse qui est donnée par l’instruction iAdrszMessage .int szMessage située après cette partie du code. Pourquoi cette complication alors que nous aurions pu écrire ldr r0,szMessage directement ? Cela n’est pas possible car l’instruction et le message sont stockés dans 2 sections différentes, et il n’est pas autorisé d’accéder à une autre section depuis la section code.
+Ici nous mettons dans ce registre l’adresse du message en mémoire, adresse qui est donnée par l’instruction iAdrszMessage: .int szMessage située après cette partie du code. Pourquoi cette complication alors que nous aurions pu écrire ldr r0,szMessage directement ? Cela n’est pas possible car l’instruction et le message sont stockés dans 2 sections différentes, et il n’est pas autorisé d’accéder à une autre section depuis la section code.
 
-Mais vous allez me dire : «  ce n’est pas vrai !! j’ai vu dans des exemples de programmes arm que nous pouvions accéder directement à la variable avec l’instruction ldr r0,=szMessage ».
+Mais vous allez me dire : "Ce n’est pas vrai !! j’ai vu dans des exemples de programmes arm que nous pouvions accéder directement à la variable avec l’instruction ldr r0,=szMessage ".
 
-En effet car ces 2 instructions ldr ne sont pas véritablement des instructions de base du processeur car celui ci ne connaît qu’une seule instruction du chargement en mémoire de format ldr rx,[ry,(rz/imm]. 
+En effet car ces 2 instructions ldr ne sont pas véritablement des instructions de base du processeur car celui ci ne connaît qu’une seule instruction de chargement en mémoire de format ldr rx,[ry,(rz/imm]. 
 
 C’est encore le compilateur qui va transformer ces instructions. Dans le cas de ldr r0,=szMessage , il va créer une zone mémoire en fin de code avec l’adresse de szMessage, zone qui remplace celle que j’ai déclarée iadrszMessage mais ça revient au même !!
 
