@@ -96,4 +96,4 @@ more /data/data/com.termux/files/usr/include/arm-linux-androideabi/asm/unistd-co
 
 ```
 
-Si vous ne trouvez pas, chercher où se trouve le fichier unistd-common.h sur votre environnement termux.
+Si vous ne trouvez pas, cherchez où se trouve le fichier unistd-common.h sur votre environnement termux.
