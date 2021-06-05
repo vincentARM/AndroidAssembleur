@@ -14,7 +14,6 @@
 /*********************************/
 .data
 szMess:   .asciz "Bonjour, le monde 64 bits s'ouvre à nous.\n"
-.equ LGMESS, . - szMess
 
 /*********************************/
 /* données non initialisée       */
@@ -26,13 +25,7 @@ szMess:   .asciz "Bonjour, le monde 64 bits s'ouvre à nous.\n"
 .text
 .global main 
 main:                           // point d'entrée du programme
-                                // premier affichage
-    ldr x1,iAdrszMess
-    mov x0, #1                  // STDOUT 
-    mov x2,#LGMESS              // longueur du message
-    mov x8, 64                  // system call 'write'
-    svc #0
-                                // 2ième affichage par la routine
+                                //  affichage du message par la routine
     ldr x0,iAdrszMess
     bl affichageMess
 
