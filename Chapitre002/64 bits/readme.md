@@ -1,9 +1,12 @@
-Reprenons le programme précédent qui a servi à effectuer le test des outils.Pour commencer à programmer en assembleur, il faut appréhender plusieurs concepts qui sont indissociables.
+Reprenons le programme précédent qui a servi à effectuer le test des outils.
+Pour commencer à programmer en assembleur, il faut appréhender plusieurs concepts qui sont indissociables.
 
 C’est pourquoi dans ce petit programme qui n’affiche qu’un simple message, nous allons aborder les différentes parties d’un programme : les registres, la mémoire, le système d’exploitation etc.
 
 Les premières lignes du programmes sont des commentaires limités par les caractères /* et */. les commentaires en fin de ligne sont signalés par les caractères //·
-Ensuite nous trouvons la définition des constantes à l’aide de la pseudo instruction .equ. Une pseudo instruction est une instruction uniquement utilisé par le compilateur, ce n’est donc pas une instruction executable par le processeur.
+
+Ensuite nous trouvons la définition des constantes à l’aide de la pseudo instruction .equ. 
+Une pseudo instruction est une instruction uniquement utilisé par le compilateur, ce n’est donc pas une instruction executable par le processeur.
 
 Ici le compilateur se contentera de remplacer toutes les mots EXIT par la valeur 93 avant l’assemblage des autres instructions.
 Remarque : les pseudo instructions sont précédées d’un point mais quelque unes ne le sont pas.
@@ -57,9 +60,12 @@ Ces 2 registres sont les registres standards pour passer des paramètres au syst
 Ici c’est la fonction Exit qui termine correctement un programme. Pourquoi passer par cette fonction ? Parce que votre programme a pu dégrader certaines parties comme la pile et Linux va remettre tout d’aplomb, libérer la mémoire, fermer les fichiers restés ouverts etc 
 
 Ensuite nous trouvons la routine afficherMess dont le nom est donné par le label afficherMess : et dont les premières instructions sont 
+
+``àsm
     stp x0,lr,[sp,-16]!        // save  registres
     stp x1,x2,[sp,-16]!        // save  registres
     str x8,[sp,-16]!            // save registre
+    ```
 
 Ces instructions copient la valeur des registres x0,lr,x1,x2et x8 dans la mémoire à l’adresse indiquée par le registre de pile  sp. Le registre x0 sera stocké à l’adresse contenue dans sp puis sp sera décrémenté de 8 octets et le registre lr sera stocké à cette nouvelle adresse etc. Au final sp sera décrémenté de 16 octets + 16 octets + 16 octets = 48 octets.
 En effet en assembleur 64 bits, les instructions push et pop n’existent pas et il faut donc les remplacer par ces instructions. Remarque : l’instruction stp stocke 2 registres alors que l’instruction standard str ne stocke qu’un registre. Et l’instruction str décrémente quand même la pile de 16 octets car il est nécessaire que la pile soit toujours alignée sur une frontière de 16 octets.
@@ -80,16 +86,25 @@ Les étiquettes numériques avec les lettres f et b sont une astuce pour facilit
 
 À L’étiquette 2 nous avons donc le registre x2 qui contient le nombre d’octets qui composent le message et il nous reste plus qu’à préparer les paramètres pour appeler la fonction write. Nous mettons dans x1, l’adresse du message contenue dans x0, puis dans x0, une constante qui indique d’écrire dans la console de sortie standard de Linux puis x2 contiendra la longueur et x8 le code fonction (ici 64) et nous appelons le système d’exploitation avec svc comme avec la fonction EXIT vue plus haut.
 Nous terminons la routine en restaurant le même nombre de registres et dans l’ordre inverse avec les instructions 
+```asm
     ldr x8,[sp],16             // restaur registre
     ldp x1,x2,[sp],16          // restaur des  2 registres
     ldp x0,lr,[sp],16          // restaur des  2 registres .
+ ```
+ 
  Ceci est très important, il faut toujours avoir une pile identique après l’appel à une routine ou fonction.
 Puis nous retournons au programme principal avec l’instruction ret qui signifie de sauter à l’adresse indiquée dans le registre lr et en effet, je vous ai dit plus haut que l’adresse de retour était stockée dans ce registre lors de l’appel de la routine.
 Ouf tout est parfait !! 
+
 Si vous avez tout suivi, vous avez compris 90 % d’un programme assembleur. Vous pouvez donc pour vous entraîner, modifier le message, ou afficher un autre message ou plusieurs, enlever le caractère \n etc.
+
 Vous avez encore bien sûr de nombreuses interrogations  sur ce programme !! 
-Par exemple vous vous demandez comment nous connaissons les codes fonctions des appels système, et les valeurs a passer dans les paramètres. Heureusement sur Internet, nous trouvons toute la documentation nécessaire : il suffit de taper appel systeme linux write (ou system call linux write) pour trouver plein de sites (mais souvent en anglais) mais attention les codes sont différents de ceux du 3é bits.
+
+Par exemple vous vous demandez comment nous connaissons les codes fonctions des appels système, et les valeurs a passer dans les paramètres. Heureusement sur Internet, nous trouvons toute la documentation nécessaire : il suffit de taper appel systeme linux write (ou system call linux write) pour trouver plein de sites (mais souvent en anglais) mais attention les codes sont différents de ceux du 32 bits.
+
 Mais vous pouvez trouver les codes sur votre console termux avec la commande :
+```shell
 more /data/data/com.termux/files/usr/include/arm-linux-androideabi/asm/unistd-common.h
+```
 
 Si vous ne trouvez pas, chercher où se trouve le fichier unistd-common.h sur votre environnement termux.
