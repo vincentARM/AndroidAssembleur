@@ -26,7 +26,7 @@ szMess:   .asciz "Bonjour, le monde 64 bits s'ouvre à nous.\n"
 .global main 
 main:                           // point d'entrée du programme
                                 //  affichage du message par la routine
-    ldr x0,iAdrszMess
+    ldr x0,qAdrszMess
     bl affichageMess
 
 100:                            // fin standard
@@ -34,7 +34,7 @@ main:                           // point d'entrée du programme
     mov x8,EXIT                 // system call "Exit"
     svc #0
 
-iAdrszMess:   .quad szMess
+qAdrszMess:   .quad szMess
 
 /******************************************************************/
 /*     affichage texte avec calcul de la longueur                */ 
@@ -43,6 +43,7 @@ iAdrszMess:   .quad szMess
 affichageMess:
     stp x0,lr,[sp,-16]!        // save  registres
     stp x1,x2,[sp,-16]!        // save  registres
+    str x8,[sp,-16]!           // save registre
     mov x2,#0                  // compteur taille
 1:                             // boucle calcul longueur chaine
     ldrb w1,[x0,x2]            // lecture un octet
@@ -53,8 +54,9 @@ affichageMess:
 2:
     mov x1,x0                  // adresse du texte
     mov x0,#STDOUT             // sortie Linux standard
-    mov x8, #WRITE             // code call system "write" */
+    mov x8, #WRITE             // code call system "write"
     svc #0                     // call systeme Linux
+    ldr x8,[sp],16             // restaur registre
     ldp x1,x2,[sp],16          // restaur des  2 registres
     ldp x0,lr,[sp],16          // restaur des  2 registres
     ret                        // retour adresse lr x30
