@@ -41,15 +41,15 @@ L’instruction se compose d’un mnémonique  le code opération ldr, du nom d�
 
 Un registre est un composant électronique élémentaire du processeur dont la taille est de 64 bits soit 8 octets. Il peut donc contenir les valeurs de 0 à 2 puissance 64 - 1 soit 18 446 744 073 709 551 615 . 
 Ces valeurs représentent ce que vous voulez : un nombre, une adresse, une couleur, un code ascii etc. Nous verrons plus en détail les registres au chapitre suivant.
-Ici nous mettons dans ce registre l’adresse du message en mémoire, adresse qui est donnée par l’instruction qAdrszMessage .quad szMessage située après cette partie du code. Pourquoi cette complication alors que nous aurions pu écrire ldr r0,szMessage directement ? Cela n’est pas possible car l’instruction et le message sont stockés dans 2 sections différentes, et il n’est pas autorisé d’accéder à une autre section depuis la section code.
+Ici nous mettons dans ce registre l’adresse du message en mémoire, adresse qui est donnée par l’instruction qAdrszMessage .quad szMessage située après cette partie du code. Pourquoi cette complication alors que nous aurions pu écrire ldr x0,szMessage directement ? Cela n’est pas possible car l’instruction et le message sont stockés dans 2 sections différentes, et il n’est pas autorisé d’accéder à une autre section depuis la section code.
 
-Mais vous allez me dire : «  ce n’est pas vrai !! j’ai vu dans des exemples de programmes arm que nous pouvions accéder directement à la variable avec l’instruction ldr r0,=szMessage ».
+Mais vous allez me dire : "Ce n’est pas vrai !! j’ai vu dans des exemples de programmes arm que nous pouvions accéder directement à la variable avec l’instruction ldr x0,=szMessage".
 
 En effet car ces 2 instructions ldr ne sont pas véritablement des instructions de base du processeur car celui ci ne connaît qu’une seule instruction du chargement en mémoire de format ldr xx,[xy,(xz/imm]. 
 
 C’est encore le compilateur qui va transformer ces instructions. Dans le cas de ldr x0,=szMessage , il va créer une zone mémoire en fin de code avec l’adresse de szMessage, zone qui remplace celle que j’ai déclarée qadrszMessage mais ça revient au même !!
 
-Et ensuite le compilateur va remplacer soit l’instruction ldr r0,qAdrszMessage soit ldr x0,NouvelleAdresseSzMessage par l’instruction ldr x0,[pc,Deplacement] avec pc = le registre qui contient l’adresse de l’instruction exécutée et Deplacement = au nombre d’octets entre cette instruction et l’adresse  qAdrszMessage.
+Et ensuite le compilateur va remplacer soit l’instruction ldr x0,qAdrszMessage soit ldr x0,NouvelleAdresseSzMessage par l’instruction ldr x0,[pc,Deplacement] avec pc = le registre qui contient l’adresse de l’instruction exécutée et Deplacement = au nombre d’octets entre cette instruction et l’adresse  qAdrszMessage.
 
 L’instruction suivante bl afficherMess est un appel à la sous routine afficherMess et est équivalente au call d’autres langages. Mais en assembleur arm, l’adresse de retour de la procédure est stockée dans le registre x30 aussi nommé  lr.
 
@@ -67,9 +67,13 @@ Ensuite nous trouvons la routine afficherMess dont le nom est donné par le labe
     str x8,[sp,-16]!            // save registre
  ```
 
-Ces instructions copient la valeur des registres x0,lr,x1,x2et x8 dans la mémoire à l’adresse indiquée par le registre de pile  sp. Le registre x0 sera stocké à l’adresse contenue dans sp puis sp sera décrémenté de 8 octets et le registre lr sera stocké à cette nouvelle adresse etc. Au final sp sera décrémenté de 16 octets + 16 octets + 16 octets = 48 octets.
+Ces instructions copient la valeur des registres x0,lr,x1,x2et x8 dans la mémoire à l’adresse indiquée par le registre de pile  sp. Le registre x0 sera stocké à l’adresse contenue dans sp puis sp sera décrémenté de 8 octets et le registre lr sera stocké à cette nouvelle adresse etc. 
+Au final sp sera décrémenté de 16 octets + 16 octets + 16 octets = 48 octets.
+
 En effet en assembleur 64 bits, les instructions push et pop n’existent pas et il faut donc les remplacer par ces instructions. Remarque : l’instruction stp stocke 2 registres alors que l’instruction standard str ne stocke qu’un registre. Et l’instruction str décrémente quand même la pile de 16 octets car il est nécessaire que la pile soit toujours alignée sur une frontière de 16 octets.
+
 Il s ‘agit donc d’une sauvegarde des registres qui vont être utilisés dans la routine. Nous verrons plus tard la règle exacte de sauvegarde mais  pour cette routine qui va être appelée dans de nombreux programmes, je préfère sauvegarder tous les registres pour ne pas avoir de problème plus tard. 
+
 Mais les spécialistes vont me dire que c’est au détriment de la rapidité d’exécution. Bof ! Comme nous appelons une fonction du système d’exploitation pour l’affichage, fonction qui va dérouler des centaines d’instructions nous ne sommes pas ici à quelques cycles supplémentaires !!
 
 La fonction write utilisée nécessite de lui passer l’adresse du message en mémoire mais aussi sa longueur. 
@@ -102,9 +106,4 @@ Vous avez encore bien sûr de nombreuses interrogations  sur ce programme !!
 
 Par exemple vous vous demandez comment nous connaissons les codes fonctions des appels système, et les valeurs a passer dans les paramètres. Heureusement sur Internet, nous trouvons toute la documentation nécessaire : il suffit de taper appel systeme linux write (ou system call linux write) pour trouver plein de sites (mais souvent en anglais) mais attention les codes sont différents de ceux du 32 bits.
 
-Mais vous pouvez trouver les codes sur votre console termux avec la commande :
-```shell
-more /data/data/com.termux/files/usr/include/arm-linux-androideabi/asm/unistd-common.h
-```
 
-Si vous ne trouvez pas, chercher où se trouve le fichier unistd-common.h sur votre environnement termux.
