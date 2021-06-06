@@ -61,11 +61,11 @@ Ici c’est la fonction Exit qui termine correctement un programme. Pourquoi pas
 
 Ensuite nous trouvons la routine afficherMess dont le nom est donné par le label afficherMess : et dont les premières instructions sont 
 
-``àsm
+```asm
     stp x0,lr,[sp,-16]!        // save  registres
     stp x1,x2,[sp,-16]!        // save  registres
     str x8,[sp,-16]!            // save registre
-    ```
+ ```
 
 Ces instructions copient la valeur des registres x0,lr,x1,x2et x8 dans la mémoire à l’adresse indiquée par le registre de pile  sp. Le registre x0 sera stocké à l’adresse contenue dans sp puis sp sera décrémenté de 8 octets et le registre lr sera stocké à cette nouvelle adresse etc. Au final sp sera décrémenté de 16 octets + 16 octets + 16 octets = 48 octets.
 En effet en assembleur 64 bits, les instructions push et pop n’existent pas et il faut donc les remplacer par ces instructions. Remarque : l’instruction stp stocke 2 registres alors que l’instruction standard str ne stocke qu’un registre. Et l’instruction str décrémente quand même la pile de 16 octets car il est nécessaire que la pile soit toujours alignée sur une frontière de 16 octets.
