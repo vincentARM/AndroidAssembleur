@@ -78,6 +78,8 @@ Rappel des étapes de création d'un programme exécutable en assembleur :
       Sauvegarder ce source avec l'extention .s
       
       Compiler le programme avec l'outil as. Vous pouvez vérifier le résultat de la compilation dans le fichier $1"list.txt" du script ci dessus.
+       
+          Cette étape tranforme chaque instruction du programme source en un code sur 4 octets (32 bits) compréhensible par le processeur
       
           Cette étape crée un programme objet : $1.o
       
