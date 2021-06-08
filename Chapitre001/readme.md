@@ -72,11 +72,24 @@ Tout est ok ?  Vous êtes prêt pour la suite.
 Rien ne fonctionne !! alors vous devez vérifier toutes les étapes précédentes.
       
 Rappel des étapes de création d'un programme exécutable en assembleur :
+      
       Saisir le programme source avec un éditeur de texte. Remarque : vérifier l'encodage du programme pour éviter des problèmes d'affichage des caractères accentués.
+      
       Sauvegarder ce source avec l'extention .s
-      Compiler le programme avec l'outil as. Vous pouvez vérifier le résultat de la compilation dans le fichier $1"list.txt" du scrip ci dessus.
+      
+      Compiler le programme avec l'outil as. Vous pouvez vérifier le résultat de la compilation dans le fichier $1"list.txt" du script ci dessus.
+      
           Cette étape crée un programme objet : $1.o
+      
+          Vous pouvez aussi supprimer l'affichage de cette liste.
+
       Linker l'objet avec le linker ld. Vous pouvez vérifier le résultat dans le fichier $1"map.txt".
+      
+         Cette étape effectue tous les liens des différents modules et affecte des adresses mémoires aux sections .data .bss et .text.
+      
+         Elle crée un programme directement exécutable $1
+      
+         Vous pouvez aussi supprimer l'affichage de cette liste.
 
 Si vous maîtrisez, les chaînes de compilation vous pouvez installer sur votre ordinateur préféré tout l’environnement ARM et transférer seulement l’exécutable sur le téléphone avec par exemple filezilla. (attention pensez à mettre les droits à 777 pour rendre le fichier exécutable).
 
