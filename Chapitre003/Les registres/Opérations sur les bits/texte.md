@@ -66,3 +66,40 @@ Une instruction en langage machine ne fait que 4 octets de longueur donc il n’
 
 C’est le compilateur qui effectuera le travail et il vous signalera une erreur si la valeur à stocker n’est pas possible. Dans ce cas il faudra soit utiliser des additions ou d’autres méthodes pour y arriver.
  
+### Opérations logiques sur les bits.
+L’assembleur permet d’effectuer les opérations logiques ET, OU, OU exclusif, négation et l’opération de remise à zéro d’un seul bit.
+
+Dans le programme operBits32.s  nous continuons d’utiliser les 2 routines d’affichage vues dans le programme précédent pour afficher le résultat de ces opérations logiques.
+
+Nous commençons par mettre dans le registre r1 la valeur 0b0011 et dans le registre r2 la valeur 0b0101 puis nous effectuons l’opération logique ET avec l’opérateur and.
+Voici le résultat.
+```
+Début du programme 32 bits.
+00000000 00000000 00000000 00000011
+00000000 00000000 00000000 00001010
+Résultat opération ET :
+00000000 00000000 00000000 00000010
+```
+
+Vous voyez que seul le deuxième bit passe à 1 puisque les 2 registres ont seulement ce bit à 1 simultanément.
+
+Le programme continue avec les opérateur OU, OU exclusif, NON et la remise à zéro d’un ou plusieurs bits.
+
+Voici le résultat complet :
+```
+Début du programme 32 bits.
+00000000 00000000 00000000 00000011
+00000000 00000000 00000000 00001010
+Résultat opération ET :
+00000000 00000000 00000000 00000010
+Résultat opération OU :
+00000000 00000000 00000000 00001011
+Résultat opération OU exclusif :
+00000000 00000000 00000000 00001001
+Résultat opération NON  :
+11111111 11111111 11111111 11111100
+Résultat opération RAZ bit  :
+11111111 11111111 11111111 11100111
+Fin normale du programme.
+```
+
