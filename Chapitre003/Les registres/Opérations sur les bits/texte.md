@@ -64,5 +64,5 @@ Les bits les plus à gauche sont les bits de poids forts.
 
 Une instruction en langage machine ne fait que 4 octets de longueur donc il n’est pas possible de stocker toutes les valeurs en une seule instruction. Il est possible de stocker chaque valeur de 0 à 65536 mais il n’est possible de ne stocker que certaines valeurs au delà grâce à un mécanisme particulier (voir https://alisdair.mcdiarmid.org/arm-immediate-value-encoding/). 
 
-C’est le compilateur qui effectuera le travail et il vous signalera une erreur si la valeur à stocker n’est pas possible. Dans ce cas il faudra soit utiliser des additions ou d’autres méthode pour y arriver.
+C’est le compilateur qui effectuera le travail et il vous signalera une erreur si la valeur à stocker n’est pas possible. Dans ce cas il faudra soit utiliser des additions ou d’autres méthodes pour y arriver.
  
