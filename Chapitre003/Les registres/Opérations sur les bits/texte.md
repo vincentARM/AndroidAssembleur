@@ -102,6 +102,8 @@ Résultat opération RAZ bit  :
 11111111 11111111 11111111 11100111
 Fin normale du programme.
 ```
+### Deplacements de bits
+
 Maintenant nous allons voir une autre série d’opérations autorisées : les déplacements :
 
 Dans le programme deplBits32.s Nous mettons la valeur 0b1110011 dans le registre r1 pour suivre les différents déplacements.
@@ -185,3 +187,6 @@ movcs r4,#49     @ carry à 1  Code ascii 49.
 ```
 
 Le programme suivant utilisera cette nouvelle routine.
+
+### comptage et tests de bits
+
