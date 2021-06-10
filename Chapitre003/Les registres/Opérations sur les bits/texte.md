@@ -190,3 +190,37 @@ Le programme suivant utilisera cette nouvelle routine.
 
 ### comptage et tests de bits
 
+Dans le programme testsBits32.s, nous modifions la routine d’affichage pour utiliser l’instruction de déplacement gauche, ce qui nous permet d’économiser 2 registres.
+
+Ensuite nous utilisons l’instruction 
+```asm
+clz r0,r1
+```
+
+pour compter le nombre de bits à zero en partant de la gauche du registre r1. Le résultat est mis dans le registre r0 que nous affichons avec notre routine.
+Voici le résultat :
+```
+Début du programme 32 bits.
+00000000 00000000 00000000 01110011
+Nombre de zéros à gauche :
+00000000 00000000 00000000 00011001
+```
+
+Évidement le résultat est affiché en base 2 et donc en attendant mieux, il nous faut le convertir en un nombre en base 10 soit 1 + 0 * 2 + 0 * 4 + 1 * 8 + 1 * 16  = 1 + 8 + 16 = 25 
+et en effet il y a 25 zéros à gauche.
+
+Puis nous utilisons l’instruction tst pour tester la valeur d’un bit particulier et nous terminons en utilisant l’instruction teq pour déterminer si 2 valeurs sont égales ( remarque : l’instruction cmp fait la même chose ) ? 
+
+Voici le résultat complet :
+```
+Début du programme 32 bits.
+00000000 00000000 00000000 01110011
+Nombre de zéros à gauche :
+00000000 00000000 00000000 00011001
+Le bit testé est à 1
+Le bit testé est à 0
+Valeurs inégales
+Valeurs égales
+Fin normale du programme.
+```
+
