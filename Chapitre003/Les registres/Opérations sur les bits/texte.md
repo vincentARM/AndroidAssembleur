@@ -102,4 +102,59 @@ Résultat opération RAZ bit  :
 11111111 11111111 11111111 11100111
 Fin normale du programme.
 ```
+Maintenant nous allons voir une autre série d’opérations autorisées : les déplacements :
 
+Dans le programme deplBits32.s Nous mettons la valeur 0b1110011 dans le registre r1 pour suivre les différents déplacement.
+
+Nous commençons par déplacer tous les bits du registre de 5 positions sur la gauche avec l’ instruction :
+```asm
+lsl r0,r1,#5
+```
+Voici le résultat :
+
+
+Les bits les plus à gauche sont perdus et les nouveauc bits à droite sont mis à 0.
+
+Puis nous déplaçons toujours les bits du registre r1 de 3 positions sur la droite : positions contenues dans le registre r2 :
+```asm
+    mov r2,#3
+    lsr r0,r1,r2    
+ ```
+ 
+Dans ce cas, les bits à droite sont perdus et les nouveaux bits à gauche sont mis à 0.
+Puis nous effectuons une rotation à droite de 3 positions avec l’instruction :
+```asm
+ror r0,r1,#3  
+```
+
+Dans ce cas les bits qui sortent de la droite sont mis à gauche.
+
+Particularité : avec l’opérateur asr, un déplacement sur la droite met un ou des 1 à gauche si le dernier bit  (bit 31) est un 1 sinon il met des zéros. Nous verrons son utilité plus tard.
+
+Exemple :
+```asm
+    lsl r2,r1,#25
+    mov r0,r2
+    bl afficherBinaire
+    asr r0,r2,#4                  @ opérateur asr
+    bl afficherBinaire
+```
+
+Il est aussi possible de tester la valeur du dernier bit exclus lors des déplacements en ajoutant un au mnémonique de l’instruction (lsls ou lsrs ou asrs). Dans ce cas le bit est mis dans un bit d’un registre particulier : bit de retenue (ou carry) du registre d’état.
+
+Il est possible de tester la valeur de ce bit avec les conditions cs (Carry Set = 1) et cc (Carry clear = 0).
+
+Suivant ces conditions, le programme effectue un saut pour afficher le message indiquant la valeur du bit.
+
+Enfin le programme utilise l’opérateur rrx. Celui ci effectue une rotation d’une position sur la droite et le bit qui était dans le carry est mis dans le bit 31. Et le bit exclus par la droite vient le remplacer dans le carry. Amusant !! mais je n’ai pas encore trouvé l’utilité !!
+
+Avec l’instruction lsls, nous pouvons simplifier la routine d’affichage d’un registre en décimal.
+
+En effet il nous suffit d’effectuer ceci :
+```asm
+lsls r0,#1           @ déplace les bits de 1 vers la gauche et met le 31 dans le carry
+movcc  r4,#48   @ carry à 0   Code ascii 48
+movcs r4,#49     @ carry à 1  Code ascii 49.
+```
+
+Le programme suivant utilisera cette nouvelle routine.
