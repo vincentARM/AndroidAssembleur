@@ -104,14 +104,19 @@ Fin normale du programme.
 ```
 Maintenant nous allons voir une autre série d’opérations autorisées : les déplacements :
 
-Dans le programme deplBits32.s Nous mettons la valeur 0b1110011 dans le registre r1 pour suivre les différents déplacement.
+Dans le programme deplBits32.s Nous mettons la valeur 0b1110011 dans le registre r1 pour suivre les différents déplacements.
 
 Nous commençons par déplacer tous les bits du registre de 5 positions sur la gauche avec l’ instruction :
 ```asm
 lsl r0,r1,#5
 ```
 Voici le résultat :
-
+```
+Début du programme 32 bits.
+00000000 00000000 00000000 01110011
+Résultat déplacement gauche :
+00000000 00000000 00001110 01100000
+```
 
 Les bits les plus à gauche sont perdus et les nouveauc bits à droite sont mis à 0.
 
@@ -147,6 +152,28 @@ Il est possible de tester la valeur de ce bit avec les conditions cs (Carry Set 
 Suivant ces conditions, le programme effectue un saut pour afficher le message indiquant la valeur du bit.
 
 Enfin le programme utilise l’opérateur rrx. Celui ci effectue une rotation d’une position sur la droite et le bit qui était dans le carry est mis dans le bit 31. Et le bit exclus par la droite vient le remplacer dans le carry. Amusant !! mais je n’ai pas encore trouvé l’utilité !!
+Voici le résultat complet de l'exécution :
+```
+Début du programme 32 bits.
+00000000 00000000 00000000 01110011
+Résultat déplacement gauche :
+00000000 00000000 00001110 01100000
+Résultat déplacement droit :
+00000000 00000000 00000000 00001110
+Résultat rotation droite :
+01100000 00000000 00000000 00001110
+Résultat déplacement droit arithmétique :
+11100110 00000000 00000000 00000000
+11111110 01100000 00000000 00000000
+Résultat deplacement droit avec récupération bit :
+Bit extrait = 1  :
+Bit extrait = 0  :
+Résultat rotation avec retenue  :
+00000000 00000000 00000000 00111001
+10000000 00000000 00000000 00111001
+Fin normale du programme.
+```
+
 
 Avec l’instruction lsls, nous pouvons simplifier la routine d’affichage d’un registre en décimal.
 
