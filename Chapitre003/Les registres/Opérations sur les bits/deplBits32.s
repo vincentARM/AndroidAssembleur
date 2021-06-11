@@ -90,6 +90,14 @@ main:
     lsrs r0,r1,#1                  @ déplacement de 1 position sur la droite
     rrx r0,r1
     bl afficherBinaire
+    
+    
+    ldr r0,iAdrszMessAffDeplGau
+    bl afficherMess
+    mov r2,#0b11                   @ maj r2 
+    mov r0,r2,lsl #8               @ copie dans r0 après déplacement à gauche de 8 bits
+    bl afficherBinaire
+    
     ldr r0,iAdrszMessFinPgm        @ adresse du message 
     bl afficherMess                @ appel fonction d'affichage
                                    @ fin du programme
