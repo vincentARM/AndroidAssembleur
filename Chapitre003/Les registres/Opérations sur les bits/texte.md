@@ -237,6 +237,8 @@ Valeurs égales
 Fin normale du programme.
 ```
 Dans ces petits programmes vous avez remarqué les 2 manières de programmer le IF THEN ELSE :
-Soit en utilisant des instructions conditionnelles comme movcc et movcs dans les cas simples 
+
+soit en utilisant des instructions conditionnelles comme movcc et movcs dans les cas simples 
+
 soit en utilsant des sauts comme beq 1f pour les cas plus compliqués ( plusieurs instructions ou appel à une routine 
 car à son retour, l'état des drapeaux est inconnu).
