@@ -154,6 +154,17 @@ Il est possible de tester la valeur de ce bit avec les conditions cs (Carry Set 
 Suivant ces conditions, le programme effectue un saut pour afficher le message indiquant la valeur du bit.
 
 Enfin le programme utilise l’opérateur rrx. Celui ci effectue une rotation d’une position sur la droite et le bit qui était dans le carry est mis dans le bit 31. Et le bit exclus par la droite vient le remplacer dans le carry. Amusant !! mais je n’ai pas encore trouvé l’utilité !!
+
+Enfin il est possible gràce à un mécanisme ( ) d'effectuer un déplacement de bits avant de copier le résultat dans un registre dans une même instruction :
+Par exemple, déplacement de 8 positions des bits de r2 et copie du résultat dans r0 :
+```asm
+    mov r2,#0b11                   @ maj r2 
+    mov r0,r2,lsl #8               @ copie dans r0 avec déplacement à gauche de 8 bits
+    bl afficherBinaire
+```
+Remarque : r2 n'est pas affecté par cette opération, le déplacement est fait en interne.
+
+
 Voici le résultat complet de l'exécution :
 ```
 Début du programme 32 bits.
@@ -173,6 +184,8 @@ Bit extrait = 0  :
 Résultat rotation avec retenue  :
 00000000 00000000 00000000 00111001
 10000000 00000000 00000000 00111001
+Résultat déplacement gauche :
+00000000 00000000 00000011 00000000
 Fin normale du programme.
 ```
 
