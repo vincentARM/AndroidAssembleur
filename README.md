@@ -11,7 +11,7 @@ découverte de l'assembleur ARM sur smarphone ou tablette Android. Discovery of 
 
    * [Chapitre 3.1 : Les registres.](https://github.com/vincentARM/AndroidAssembleur/tree/main/Chapitre003/Les%20registres)
 
-   * [Chapitre 3.1.1 : opérations sur les bits.](https://github.com/vincentARM/AndroidAssembleur/tree/main/Chapitre003/Les%20registres/Op%C3%A9rations%20sur%20les%20bits)
+     * [Chapitre 3.1.1 : opérations sur les bits.](https://github.com/vincentARM/AndroidAssembleur/tree/main/Chapitre003/Les%20registres/Op%C3%A9rations%20sur%20les%20bits)
 
 
  
