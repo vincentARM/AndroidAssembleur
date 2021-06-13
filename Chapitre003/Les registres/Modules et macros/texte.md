@@ -48,8 +48,10 @@ smacroafficheMess\@:
 La macro est délimitée par les pseudo instructions .macro et .endm. AfficherLib est le nom de la macro qui servira à l’insérer et str est le nom du seul paramètre à passer à la macro. 
 
 Pour insérer la macro n’importe où dans la section code d’un programme, il suffira de taper afficherLib Bonjour.
+
 Dans le corps de la macro, nous commençons par sauvegarder sur la pile le registre r0 et le registre d’état pour être le plus transparent possible.
-Ensuite nous récupérons l’adresse du libellé à afficher. Cette adresse est indéxée par un n° donné par le compilateur gràace au code \@ . Si cette macro est insérée plusieurs fois, l’adresse de la zoe sera donc différent.  Le contenu du livellé est défini par .ascii « \str » et \str sera remplacé lors de l’insertion par le texte qui sera mis après le nom de la macro.
+
+Ensuite nous récupérons l’adresse du libellé à afficher. Cette adresse est indéxée par un n° donné par le compilateur gràace au code \@ . Si cette macro est insérée plusieurs fois, l’adresse de la zoe sera donc différent.  Le contenu du libellé est défini par .ascii "\str" et \str sera remplacé lors de l’insertion par le texte qui sera mis après le nom de la macro.
 
 Ce libellé sera affiché par notre routine d’affichage et il nous reste à restaurer les registres pour continuer.
 
