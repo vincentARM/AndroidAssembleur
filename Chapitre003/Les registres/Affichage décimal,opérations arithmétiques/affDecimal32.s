@@ -102,7 +102,8 @@ main:
     mov r2,#0xFFFA
     add r0,r2,r1,lsl #16       @ positionne dans r0 le nombre 4 294 967 290
     
-    adds r0,#2                 @ ajoute 20
+    adds r0,#2                  @ ajoute 2
+    //adds r0,#20                 @ ajoute 20
     bcc 1f
     afficherLib "Retenue positionnée. \n"
     b 2f
