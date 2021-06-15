@@ -78,7 +78,7 @@ Addition sur 64 bits
 
 Fin normale du programme.
 ``` 
-###Soustractions :
+### Soustractions :
 Maintenant nous allons utiliser l’instruction sub pour effectuer des soustractions dans le programme soustraction32.s.
 
 Nous effectuons une soustraction simple puis une soustraction dont le résultat est manifestement faux.
@@ -117,6 +117,7 @@ Mais comment le processeur sait-il que le registre contient une valeur non sign�
 Et bien, il ne le sait pas !! c’est vous qui en choisissant les instructions et les tests détermineront si la valeur doit être dans l’un ou l’autre cas.
 
 Et déjà il faut dupliquer la routine d’affichage en base 10 l’ancienne qui affichera les valeurs de 0 à 4 294 967 295 et une nouvelle qui affichera les valeurs avec le signe + ou le signe – suivant leur plage et c’est vous qui déciderez s’il faut appeler l’une ou l’autre routine.
+
 Heureusement, l’assembleur propose un indicateur du registre d’état s (pour signe) qui sera mis à 1 si le résultat d’une opération est une valeur négative.
 
 Voyons déjà la nouvelle routine de conversion conversion10S  (s pour signée) :
