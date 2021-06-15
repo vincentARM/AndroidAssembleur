@@ -1,6 +1,6 @@
 /* ARM assembleur Android termux  32 bits */
-/*  program testMacros32.s   */
-/* tests d'une macro d'affichage de libellés   */
+/*  program affDecimal32.s   */
+/*  affichage décimal d'un registre. Opération addition   */
 /**************************************/
 /* Constantes                         */
 /**************************************/
@@ -110,8 +110,33 @@ main:
 1:
    afficherLib "Pas de retenue. \n"
 2:
-
-
+                                    @ additions successives 
+                                    
+    afficherLib "Addition sur 64 bits "
+    mov r1,#0xFFFF
+    mov r6,#0xFFFA
+    add r1,r6,r1,lsl #16           @ positionne dans r1 le nombre 4 294 967 290   (partie basse d'un nombre de 64 bits)
+    mov r2,#5                     @ positionne 5 dans r2 partie haute du nombre de 64 bits
+    mov r3,#20                     @ positionne 20 dans r3  partie basse du 2ième nombre de 64 bits
+    mov r4,#10                     @ positionne 10 dans r4 partie haute du 2 iéme nombre
+    adds r5,r1,r3                  @ ajoute les 2 parties basses 
+    adc  r6,r2,r4                  @ ajoute les 2 parties hautes et la retenue
+    mov r0,r5                      @ pour afficher la partie basse du résultat
+    ldr r1,iAdrszZoneConv
+    bl conversion10
+    ldr r0,iAdrszZoneConv          @ resultat partie basse
+    bl afficherMess 
+    ldr r0,iAdrszRetourLigne
+    bl afficherMess
+    mov r0,r6                      @ pour afficher la partie haute
+    ldr r1,iAdrszZoneConv
+    bl conversion10
+    ldr r0,iAdrszZoneConv          @   resultat partie haute
+    bl afficherMess 
+    ldr r0,iAdrszRetourLigne
+    bl afficherMess
+    
+    
     ldr r0,iAdrszMessFinPgm        @ adresse du message 
     bl afficherMess                @ appel fonction d'affichage
                                    @ fin du programme
@@ -139,7 +164,7 @@ conversion10:
 1:                             @ debut de boucle de conversion
     mov r2,r0                  @ copie nombre départ ou quotients successifs
     udiv r0,r2,r3              @ division par le facteur de conversion
-    mls r2,r0,r3,r2            @ calcul du reste de la divsion 
+    mls r2,r0,r3,r2            @ calcul du reste de la division 
     add r2,#48                 @ car c'est un chiffre
     strb r2,[r1,r4]            @ stockage du byte au debut zone (r1) + la position (r4)
     sub r4,r4,#1               @ position précedente
