@@ -4,7 +4,10 @@ Il serait donc intéressant de les déporter dans un autre module unique qui ser
 Pour cela, nous allons créer un programme source appelé routines32.s et qui contiendra les 3 routines conversion16, conversion2 et afficherMess.
 Ces 3 routines doivent être déclarées globales pour être visibles par l’éditeur de lien et donc pour être appelées par les programmes.
 
-Ce programme est compilé pour créer un programme objet routines32.o
+Ce programme est compilé pour créer un programme objet routines32.o. 
+Comme il n'y a pas d'etiquette main, et si vous utilisez le script précedent le signalement suivant :
+* ld: warning: cannot find entry symbol main; defaulting to 00010054 *
+n'est pas critique. 
 
 Il nous faut modifier le script de compilation pour indiquer au linker l’emplacement de ce programme objet.
 Voici le nouveau script :
