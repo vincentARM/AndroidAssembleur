@@ -25,7 +25,7 @@ Enfin la retenue peut être récupérée pour être additionnée à une autre ad
 
 Par exemple nous voulons additionner 2 nombres de 64 bits, le registre r1 contient les 32 bits de la partie basse du 1er nombre, le registre r2 la partie haute, le registre r3 la partie basse du 2ième nombre et r4 la partie haute.
 
-Il nous suffit d(effectuer l’addition comme ceci 
+Il nous suffit d'effectuer l’addition comme ceci :
 ```asm
 adds r5,r1,r3      @ additionne les parties basses
 adc  r6,r2,r5      @ additionne les parties hautes et la retenue.
@@ -45,7 +45,9 @@ Le 2ieme nombre correspond donc à 42 949 672 960 + 20 = 42 949 672 980
 et la somme des 2 = 25 769 803 770 + 42 949 672 980 = 68 719 476 750
 
 L’affichage du résultat nous donne 14 pour la partie basse et 16 pour la partie haute ce qui correspond à 16 * (2 puis 32) = 68 719 476 736.
+
 Le résultat est donc : 68 719 476 736 + 14 = 68 719 476 750
+
 Banco c’est le même que calculé plus haut. 
 
 
