@@ -102,8 +102,8 @@ main:
     mov r2,#0xFFFA
     add r0,r2,r1,lsl #16       @ positionne dans r0 le nombre 4 294 967 290
     
-    adds r0,#2                  @ ajoute 2
-    //adds r0,#20                 @ ajoute 20
+    adds r0,#2                  @ ajoute 2   et il n'y a pas de retenue
+    //adds r0,#20                 @ ajoute 20 et il y a retenue
     bcc 1f
     afficherLib "Retenue positionnée. \n"
     b 2f
@@ -138,11 +138,10 @@ conversion10:
     mov r3,#10                 @ conversion decimale
 1:                             @ debut de boucle de conversion
     mov r2,r0                  @ copie nombre départ ou quotients successifs
-    udiv r0,r2,r3
-    mls r2,r0,r3,r2
-    //bl divisionEntiere         @ division par le facteur de conversion
+    udiv r0,r2,r3              @ division par le facteur de conversion
+    mls r2,r0,r3,r2            @ calcul du reste de la divsion 
     add r2,#48                 @ car c'est un chiffre
-    strb r2,[r1,r4]            @ stockage du byte au debut zone (r5) + la position (r4)
+    strb r2,[r1,r4]            @ stockage du byte au debut zone (r1) + la position (r4)
     sub r4,r4,#1               @ position précedente
     cmp r0,#0                  @ arret si quotient est égale à zero
     bne 1b    
@@ -151,16 +150,14 @@ conversion10:
     moveq r0,#LGZONE           @ si début = 0 la zone est compléte
     beq 100f                   @ donc fin 
     mov r2,#0                  @ indice début zone
-2:    
-    ldrb r3,[r1,r4]
-    strb r3,[r1,r2]            @ stockage du byte
-    add r2,#1
-    add r4,r4,#1               @ position précedente
-    cmp r4,#LGZONE
-    ble 2b                     @ boucle si r4 <= longueur zone
-    mov r3,#0
-    strb r3,[r1,r2]
-    mov r0,r2                  @ retourne la longueur du résultat
+2:                             @ boucle de déplacement
+    ldrb r3,[r1,r4]            @ charge un octet du résultat
+    strb r3,[r1,r2]            @ et le stocke au début
+    add r2,#1                  @ incremente la position de stockage
+    add r4,r4,#1               @ incremente la position de chargement
+    cmp r4,#LGZONE + 1         @ c'est la fin ??
+    ble 2b                     @ boucle si r4 <= longueur zone (y compris le 0 final)
+    sub r0,r2,#1               @ retourne la longueur du résultat (sans le zéro final)
 
 100:
                                @ fin standard de la fonction
