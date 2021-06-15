@@ -6,7 +6,8 @@ Ces 3 routines doivent être déclarées globales pour être visibles par l’é
 
 Ce programme est compilé pour créer un programme objet routines32.o. 
 Comme il n'y a pas d'etiquette main, et si vous utilisez le script précedent le signalement suivant :
-* ld: warning: cannot find entry symbol main; defaulting to 00010054 *
+**ld: warning: cannot find entry symbol main; defaulting to 00010054**
+
 n'est pas critique. 
 
 Il nous faut modifier le script de compilation pour indiquer au linker l’emplacement de ce programme objet.
