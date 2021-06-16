@@ -133,6 +133,19 @@ A la fin, nous déplaçons les chiffres du résultat à partir de l’octet 1 de
 Dans le corps du programme soustraction32.s nous mettons les valeurs 10 et -10 pour tester cette nouvelle routine.
 Puis nous mettons la valeur maximum négative puis la valeur maximum positive. La routine donne bien les valeurs indiquées précédemment.
 
+Mais cette solution pose de nouveaux problèmes :
+
+Additionnons les nombres 2 147 483 640  et 20.
+
+En arithmétique non signée, nous trouvons un résultat correct 2 147 483 660 mais en signée nous trouvons -2 147 483 636.
+
+Heureusement la aussi l’assembleur à prévu un indicateur dans le registre d’état il s’agit de l’indicateur v comme overflow. Il nous suffit de tester cet indicateur avec les instructions bvs (branch if overflow set) et bvc (branch if overflow clear) pour gérer les 2 cas.
+
+C’est la même chose pour la soustraction : le processeur positionne l’indicateur overflow si le résultat est inférieur à 2 147 483 648.
+
+Après une opération arithmétique dont on a demandé la mise à jour des indicateurs il est possible de savoir si un résultat est négatif ou positif en testant l’indicateur de signe s du registre d’état avec les instructions bmi (branch if negative) ou bpl (branch if positive ou zéro).
+
+
 Pour terminer, nous effectuons une utilisation de l’instruction rsb qui permet de soustraire une valeur d’un registre d’une constante. Cela permet d’économiser un registre car pour remplacer :
 ```asm
 mov r1,#20
@@ -165,6 +178,11 @@ Valeur maxi négative
 -2147483648
 Valeur maxi positive
 +2147483647
+Depassement lors de l'addition
+Affichage non signé :
+2147483660
+Affichage signé :
+-2147483636
 Soustraction inverse :
 -5
 Fin normale du programme.
