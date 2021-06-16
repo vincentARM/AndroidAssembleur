@@ -117,6 +117,28 @@ main:
     ldr r0,iAdrszRetourLigne
     bl afficherMess
     
+    AfficherLib "Depassement lors de l'addition"
+    mov r2,#0x8000
+    lsl r2,#16              @ charge 0x80000000 soit 2 puis 31 soit 2 147 483 648
+    sub r2,#8               @ et enleve 8 pour faire 2 147 483 640
+    add r2,#20               @ ajoute 20
+    AfficherLib "Affichage non signé : "
+    mov r0,r2 
+    ldr r1,iAdrszZoneConv
+    bl conversion10
+    ldr r0,iAdrszZoneConv      @ 
+    bl afficherMess
+    ldr r0,iAdrszRetourLigne
+    bl afficherMess
+    AfficherLib "Affichage signé : "
+    mov r0,r2 
+    ldr r1,iAdrszZoneConvS
+    bl conversion10S
+    ldr r0,iAdrszZoneConvS      @ 
+    bl afficherMess
+    ldr r0,iAdrszRetourLigne
+    bl afficherMess
+    
     AfficherLib "Soustraction inverse : "
     mov r1,#20
     rsb r0,r1,#15               @ calcule 15 - 20 
