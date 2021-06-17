@@ -265,3 +265,12 @@ instruction mls
 2
 Fin normale du programme.
 ```
+
+### Divisions.
+Il n’y a que 2 instructions pour la division udiv pour la division non signée et sdiv pour la division signée.
+
+De plus aucun indicateur d’état n’est positionné lors de ces divisions.
+
+Dans le programme division32.s, nous nous contentons de tester ces 2 instructions et de calculer le reste avec l’instruction mls.
+
+Vous remarquerez que si nous pouvons multiplier 2 registres de 32 bits pour avoir un résultat sur 64 bits, il n’y a pas de division de 64 bits par un registre 32 bits !! Il faudra écrire soit même la routine de division si elle est necessaire dans un calcul.
