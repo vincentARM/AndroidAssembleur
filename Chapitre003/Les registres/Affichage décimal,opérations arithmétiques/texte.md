@@ -187,3 +187,81 @@ Soustraction inverse :
 -5
 Fin normale du programme.
 ```
+
+### Multiplications
+Dans le programme multi32.s, nous allons explorer les instructions de multiplication mais tout d’abord nous déplaçons les 2 routines conversion10 et conversion10S dans le fichier des routines que nous recompilons pour avoir un fichier objet complet.
+
+Dans le premier exemple nous effectuons une multiplication simple avec 2 facteurs positifs puis une multiplication avec 2 facteurs négatifs avec l’instruction mul r0,r1,r2.
+
+Vous remarquerez que la multiplication ne peut être faite qu’à partir de registres/ Il n’est pas possible d’utiliser une valeur immédiate.
+La documentation précise aussi que seuls les indicateurs d’états  de signe et de zéro sont mis à jour si nous utilisons l’instruction muls. Les indicateurs carry et overflow ne sont pas mis à jour ce qui pose un problème pour détecter un dépassement de la taille d’un registre.
+
+Heureusement il existe les instructions umull (multiplication non signée) et smull (multiplication signée) qui stocke le résultat sur 2 registres et donc il suffit de tester si le registre qui contient la partie haute est différent de 0 pour détecter le dépassement. Bien sûr, il est possible de se servir de ces instructions pour avoir des résultats en 64 bits mais il faut dans ce cas, gérer les autres opérations et l’affichage en 64 bits.
+
+Ici nous n’avons qu’un affichage décimal en 32 bits et il nous faut donc interpréter correctement les résultats :
+
+Le registre partie basse doit être considérée comme une valeur non signée. Le registre partie haute doit être considéré comme une valeur signée multiple de 2 puissance 32.
+
+Dans le cas d’une multiplication non signée, nous avons multiplié 2 147 483 648 par 5 ce qui donne 10 737 418 240
+
+L’affichage donne pour la partie basse  2 147 483 648 et pour la partie haute 2 ce qui correspond à 2 * (2 puis 32) soit 8 589 934 592 et le résultat est donc :
+8 589 934 592 +  2 147 483 648 = 10 737 418 240  identique à celui qui était prévu.
+
+Dans le 1er cas d’une multiplication signée, nous avons multiplié +  2 147 483 647 par – 5 ce qui donne - 10 737 418 235
+
+La partie basse est  2147483653 et la partie haute est – 3 soit -3 * (2puis32) = -12 884 901 888
+
+le résultat complet est donc -12 884 901 888 + 2147483653 = 10 737 418 235
+
+
+Essayons de multiplier 2 nombres négatifs : -2 147 483 647 * - 5 = 10 737 418 235
+
+L’affichage partie basse donne +2147483643 et la partie haute à +2 ce qui donne 2* (2 puis 32)=  8 589 934 592 et le résultat sera donc :
+
+8 589 934 592 +  2147483643 = 10 737 418 235 ce qui bien celui attendu
+
+Maintenant multiplions -2 147 483 647 * 5 =  - 10 737 418 235
+
+La partie basse est  2147483653 et la partie haute est – 3 soit -3 * (2puis32) = -12 884 901 888
+
+Et le résultat sera donc 2147483653 + -12 884 901 888 = - 10 737 418 235  égal au résultat attendu.
+
+Nous avons aussi 2 autres instructions de multiplication : la première mla r0,r1,r2,r3  effectue la multiplication de r1 et r2 puis ajoute r3 et met le tout dans r0.   Nous verrons son utilisation dans le chapitre consacrée à la mémoire.
+
+La seconde mls r0,r1,r2,r3 effectue la multiplication r1 par r2 et soustrat le résultat de r3 pour mettre le tout dans r0. Elle est interessant pour calculer le reste de la division de r3 par r1.
+
+Par exemple si r3 contient 202 et r1 10, la division donne un quotient de 20 dans r1. Puis l’instruction mls fera l’opération 202 – (20 * 10) = 2.
+
+exemple complet de l’exécution :
+```
+Début du programme 32 bits.
+
+Multiplication simple
+2000
+Multiplication négative signée
++200Multiplication non signée avec résultat sur 64 bits
+Partie basse
+2147483648
+Partie haute
+2
+Multiplication signée avec résultat sur 64 bits cas 1
+Partie basse
+2147483653
+Partie haute
+-3
+Multiplication signée avec résultat sur 64 bits cas 2
+Partie basse
+2147483643
+Partie haute
++2
+Multiplication signée avec résultat sur 64 bits cas 3
+Partie basse
+2147483653
+Partie haute
+-3
+instruction mla
+1125
+instruction mls
+2
+Fin normale du programme.
+```
