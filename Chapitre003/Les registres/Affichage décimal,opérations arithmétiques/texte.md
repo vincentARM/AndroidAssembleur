@@ -136,7 +136,7 @@ Et bien, il ne le sait pas !! c’est vous qui en choisissant les instructions 
 
 Et déjà il faut dupliquer la routine d’affichage en base 10 l’ancienne qui affichera les valeurs de 0 à 4 294 967 295 et une nouvelle qui affichera les valeurs avec le signe + ou le signe – suivant leur plage et c’est vous qui déciderez s’il faut appeler l’une ou l’autre routine.
 
-Heureusement, l’assembleur propose un indicateur du registre d’état s (pour signe) qui sera mis à 1 si le résultat d’une opération est une valeur négative.
+Heureusement, l’assembleur propose un indicateur du registre d’état N (pour Négatif) qui sera mis à 1 si le résultat d’une opération est une valeur négative.
 
 Voyons déjà la nouvelle routine de conversion conversion10S  (s pour signée) :
 
