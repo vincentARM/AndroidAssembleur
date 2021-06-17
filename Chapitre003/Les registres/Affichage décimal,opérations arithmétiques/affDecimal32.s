@@ -50,7 +50,7 @@ main:
     bl afficherMess                @ appel fonction d'affichage
 
     afficherLib "Vérification affichage décimal :"
-    mov r0,#100
+    mov r0,#100                    @ met dans r0 un nombre décimal
     ldr r1,iAdrszZoneConv
     bl conversion10
     ldr r1,iAdrszZoneConvHexa
@@ -77,6 +77,29 @@ main:
     bl afficherMess
     ldr r0,iAdrszZoneConv
     bl afficherMess 
+    
+    afficherLib "\nAutre affectation grand nombre : "
+    mov r0,#0xFFFF
+    movt r0,#0xFFFF
+    ldr r1,iAdrszZoneConv
+    bl conversion10
+    ldr r0,iAdrszZoneConv
+    bl afficherMess 
+    
+    afficherLib "\nAffectation nombre en octal: "
+    mov r0,#020
+    ldr r1,iAdrszZoneConv
+    bl conversion10
+    ldr r0,iAdrszZoneConv
+    bl afficherMess
+    
+    afficherLib "\nErreur affectation : "
+    mov r0,#5678
+    movt r0,#1234
+    ldr r1,iAdrszZoneConv
+    bl conversion10
+    ldr r0,iAdrszZoneConv
+    bl afficherMess
     
     afficherLib "\nAddition"
     mov r1,#200
