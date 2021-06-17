@@ -11,6 +11,17 @@ Remarque : nous utilisons l’instruction de division udiv qui n’est pas disp
 
 Dans le corps du programme,nous appelons cette nouvelle routine pour afficher le nombre 100 puis le nombre le plus grand contenu dans un registre et nous affichons la longueur retournée pour vérification.
 
+Vous remarquerez que nous pouvons alimenter un registre soit en notation decimale soit en notation hexadécimale. Nous pouvons aussi l'alimenter en notation binaire et en notation octal. 
+
+Dans ce dernier cas c'est le 0 du début qui le distingue d'un nombre décimal : 020 n'est donc pas égal à 20 !!!
+
+Sur mon téléphone, il est aussi possible d'utiliser l'instruction movt pour inserer la partie haute d'un registre. Mais attention dans ce cas il vaut mieux utiliser la notation hexa car si vous faites 
+```asm
+mov r0,#5678
+movt r0,#1234
+```
+cela ne vous donnera pas le nombre décimal 12345678 
+
 ### Additions
 Ensuite nous trouvons un exemple d’utilisation de l’addition sur des petits nombres puis un exemple d’addition sur un grand nombre proche de la valeur maximale. Et dans ce cas nous voyons que le résultat est faux car il y a un dépassement de la valeur maximum du registre. 
 
