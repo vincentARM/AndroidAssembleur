@@ -7,7 +7,7 @@ Pour cela nous divisons successivement la valeur à convertir par 10 et nous cal
 
 Il y a un petit problème, les restes successifs des divisions donnent les chiffres décimaux en partant de la droite. Il nous faut donc ensuite recopier les chiffres du résultat dans la partie gauche de la zone de conversion pour avoir un affichage correct.
 
-Remarque : nous utilisons l’instruction de division udiv qui n’est pas disponible sur tous les processeurs arm. Dans ce cas, il faut programmer une division entière. Vous trouverez un exemple sur le site : 
+Remarque : nous utilisons l’instruction de division udiv qui n’est pas disponible sur tous les processeurs arm. Dans ce cas, il faut programmer une division entière. Vous trouverez un exemple sur le site : https://thinkingeek.com/arm-assembler-raspberry-pi/
 
 Dans le corps du programme,nous appelons cette nouvelle routine pour afficher le nombre 100 puis le nombre le plus grand contenu dans un registre et nous affichons la longueur retournée pour vérification.
 
