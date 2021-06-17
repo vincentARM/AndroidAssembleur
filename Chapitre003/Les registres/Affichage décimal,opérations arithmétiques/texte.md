@@ -76,6 +76,13 @@ Grand nombre :
 Longueur :
 00000009
 4294967295
+Autre affectation grand nombre :
+4294967295
+Affectation nombre en octal:
+16
+Erreur affectation :
+80877102
+
 Addition
 210
 Addition grand nombre
