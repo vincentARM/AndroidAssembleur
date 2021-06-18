@@ -115,4 +115,10 @@ Je n’ai pas essayé cette solution mais voir sur internet un exemple :
       
 https://www.eggwall.com/2011/09/android-arm-assembly-calling-assembly.html?m=1
 
-Une autre solution consiste à utiliser l’environnement graphique X11 et à installer sur le téléphone une application serveur X11.  C’est ce que j’ai fait et je détaillerai les problèmes rencontrés.
+Une autre solution consiste à utiliser l’environnement graphique X11 et à installer sur le téléphone une application serveur X11.  C’est ce que j’ai fait et je détaillerais les problèmes rencontrés.
+      
+Remarque : je pensais arrêter cette présentation au seul premier programme, mais emporté par mon élan, j'ai ecris un semblant de cours de programmation sur l'assembleur ARM. Ce cours écrit presqu'en temps réel est donc plein d'approximations ou même d'erreurs !! 
+N 'hésitez pas à me les signaler.
+
+Chaque chapitre est accompagné de petits programmes, n'hesitez pas à les modifier (améliorer) pour vous perfectionner en assembleur.
+      
