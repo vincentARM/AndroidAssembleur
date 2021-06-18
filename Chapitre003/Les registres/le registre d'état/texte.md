@@ -3,6 +3,7 @@
 Nous avons vu plusieurs indicateurs (flags) se trouvant dans le registre d’état. Il s’agit d’un registre supplémentaire appelé CPSR (Current Program Status Register) et dont plusieurs bits servent à enregistrer des informations sur le fonctionnement du processeur.
 
 Parmi ces indicateurs (voir la documentation arm en fonction de votre processeur), il y a 4 indicateurs qui nous intéressent  particulièrement :
+
        * l’indicateur de zéro (Z)  qui prend la valeur 1 si le registre destinataire est égal à 0
        
        * l’indicateur de signe (N) qui prend la valeur 1 si le registre contient une valeur négative
@@ -37,18 +38,18 @@ Voici la liste des codes comparaisons possibles :
 * eq :  égal
 * ne : différent
 * cs / hs : carry mis / supérieur ou égal non signé
-   cc / lo : carry à zéro / inférieur non signé
-   mi : négatif
-   pl : positif ou zéro
-   vs :  overflow
-    vc : pas d’overflow
-    hi :  supérieur non signé
-    ls ; inférieur ou égal non signé
-    ge : supérieur ou égal signé
-    lt : inférieur signé
-    gt : supérieur signé
-    le : inférieur ou égal signé
-    al : toujours (n’est jamais renseigné)
+* cc / lo : carry à zéro / inférieur non signé
+* mi : négatif
+* pl : positif ou zéro
+* vs :  overflow
+* vc : pas d’overflow
+* hi :  supérieur non signé
+* ls ; inférieur ou égal non signé
+* ge : supérieur ou égal signé
+* lt : inférieur signé
+* gt : supérieur signé
+* le : inférieur ou égal signé
+* al : toujours (n’est jamais renseigné)
 
 Voici le résultat complet de l’exécution :
 ```
