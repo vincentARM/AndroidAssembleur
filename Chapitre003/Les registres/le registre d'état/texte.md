@@ -1,4 +1,4 @@
-###Registre d’état, comparaisons.
+### Registre d’état, comparaisons.
 
 Nous avons vu plusieurs indicateurs (flags) se trouvant dans le registre d’état. Il s’agit d’un registre supplémentaire appelé CPSR (Current Program Status Register) et dont plusieurs bits servent à enregistrer des informations sur le fonctionnement du processeur.
 
