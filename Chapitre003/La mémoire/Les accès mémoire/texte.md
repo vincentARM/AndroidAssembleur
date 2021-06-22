@@ -43,7 +43,12 @@ Nous avons vu qu’il est possible de définir des données comme des adresses d
 
 Un autre point important est que si vous définissez une chaîne de caractères ou un octet ou un demi mot, il faudra ajouter la pseudo instruction .align 4 pour que la routine suivante éventuelle ait bien ses instructions alignées sur 4 octets.
 
-Reprenons le programme accesmem32 dans lequel nous avons des exemples de définitions des données. Puis dans la partie code, nous commençons par charger l’adresse de la donnée iValeur1 dans le registre r0 pour l’afficher en hexadécimal. Cette adresse est définie à la fin du corps du programme avec l’instruction 
+Reprenons le programme accesmem32 dans lequel nous avons des exemples de définitions des données. Puis dans la partie code, nous commençons par charger l’adresse de la donnée iValeur1 dans le registre r0 pour l’afficher en hexadécimal avec l'instruction :
+```asm
+ldr r0,iAdriValeur1
+```
+
+. Cette adresse est définie à la fin du corps du programme avec l’instruction 
 ```asm
 iAdriValeur1:           .int iValeur1
 ```
@@ -88,43 +93,70 @@ Voir sur wikipédia les précisions et les explications  amusantes de ces termes
 La manière de stocker les entiers peut être modifiée mais je vous déconseille de le faire !!!
 
 Maintenant nous chargeons le deuxième octet qui se trouve en position 1 (le premier étant en position 0) avec l’instruction :
+```asm
 ldr r0,[r1,#1]
+```
+
 r1 contenant l’adresse de notre entier et 1 est le déplacement (offset) à effectuer pour charger le 2ième octet.
+
 Suivant le type de processeur, le déplacement peut varier de -255 à + 255  ou -4095 à +4095 octets.
-Pour aller au delà, il faut utiliser un autre registre comme ceci 
+Pour aller au delà, il faut utiliser un autre registre comme ceci :
+```asm
 ldr r0,[r1,r2]
+```
 
 Ensuite nous avons le chargement du 2ième demi mot de notre entier qui commence à l’octet 2 avec l’instruction 
+```asm
 ldrh r0,[r1,#2]
+```
 
 Puis nous avons l’exemple du chargement du 5ième octet d’une chaîne de caractères en utilisant un registre comme déplacement.
+
 Puis nous montrons un exemple où après avoir chargé un octet, le registre de base est incrémenté de 1 pour charger l’octet suivant.
+
 Ensuite un autre exemple où cette fois, l ‘adresse est incrémentée de 1 avant d’effectuer le chargement dans le registre avec l’instruction :
+```asm
 ldrb r0,[r2,#1] !
+```
+
 Notez le ! à la fin de l’instruction.
+
 Puis encore un exemple où cette fois ci, l’adresse est incrémentée de la valeur d’un registre avec les instructions :
+```asm
 mov r3,#3
 ldrb r0,[r2],r3
+```
 
 Enfin nous effectuons un chargement multiple avec l’instruction 
+```asm
 ldm r0,{r1-r3}
+```
 dans ce cas, r0 contient l’adresse de la première valeur qui sera chargée dans le registre r1, puis la deuxième valeur (et comme ldm concerne les entiers, l’adresse sera celle de r0 + 4 ) dans r2 puis la 3ième valeur (donc à l’adresse r0+8) dans le registre r3.
+
 Remarquez que la liste des registre est encadrée par des {} et il aurait été possible d’écrire 
+
 ldm r0,{r1,r2,r3}
 
 puis nous effectuons le chargement d’une valeur de 8 octets dans 2 registres avec l’instruction 
+
 ldrd r2,r3,[r1]
+
 Le premier registre doit être un registre pair et le second soit être le successeur du premier !!
+
 r1 contenant l’adresse du début de la zone de 8 octets. R2 contiendra les 4 octets finaux et r3 les 4 octets du début.
 
 Enfin le programme se termine par un exemple du stockage d’un entier en mémoire avec l’instruction str r1 ,[r2]
+
 Remarque : c’est bien le contenu de r1 qui est stocké à l’adresse contenue dans r2.
+
 Tout ce que l’on a vu pour l’instruction ldr (ou ldm) est applicable à l’instruction str (ou stm).
 
 Par exemple pour stocker un octet à la position 4 d’une chaîne, nous utiliserons
 ceci :
+```asm
 ldr r1,iAdrszChaine
 mov r2,#r3
 mov r0,#’A’       @ caractère A
 strb r0,[r1,r2]
+```
 
