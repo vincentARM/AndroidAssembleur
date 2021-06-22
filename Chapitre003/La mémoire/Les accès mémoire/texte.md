@@ -1,4 +1,5 @@
-Définitions des données
+### Définitions des données.
+
 Nous avons déjà vue  dans les programmes précédents, la définition de chaîne de caractères suivi d’un zéro avec la pseudo instruction .asciz. Pour définir une chaîne sans le caractère zéro final, il faut utiliser la pseudo instruction .ascii. Vous avez remarqué qu’il est possible d’indiquer des caractères spéciaux comme le retour ligne \n.
 
 Pour définir un seul octet, il faut utiliser .byte, pour définir 2 octets (un demi mot de 16 bits) c’est .hword, 4 octets soit un mot de 32 bits c’est .word ou .int et enfin un double mot de 8 octets c’est .quad.
@@ -19,19 +20,19 @@ Dans ce cas il est préférable d’utiliser l’instruction .skip n qui réserv
 Vous remarquez que j’ai nommé les variables avec une première lettre minuscule qui reprend le type (hélas en anglais) de la variable. C’est une bonne pratique pour s’y retrouver et détecter des erreurs éventuelles. Donc nous trouvons :
 
 * b pour une variable d’un octet : exemple bCode
-* 
+
 * h pour un demi mot
-* 
+
 * i pour un entier
-* 
+
 * q pour un double mot
-* 
+
 * s pour une chaîne de caractères sans le 0 final
-* 
+
 * sz pour une chaîne avec le 0 final
-* 
+
 * t pour les tableaux
-* 
+
 * pt pour les pointeurs vers des structures
 
 Bon, c’est pas toujours respecté !!!
@@ -39,29 +40,51 @@ Bon, c’est pas toujours respecté !!!
 Dans la section .text, nous trouvons les instructions à exécuter, instructions qui ont une longueur de 4 octets soit 32 bits ,et toujours alignées sur une frontière de 4 octets.
 
 Nous avons vu qu’il est possible de définir des données comme des adresses dans la partie code. Nous pouvons aussi définir des constantes comme dans la .data mais attention il n’est possible que de lire ces données. Si vous essayer de mettre à jour ces données vous aurez l’erreur segmentation fault car la section code est interdite d’écriture. Et heureusement, car votre programme pourrait malencontreusement écraser des instructions avec des données.
+
 Un autre point important est que si vous définissez une chaîne de caractères ou un octet ou un demi mot, il faudra ajouter la pseudo instruction .align 4 pour que la routine suivante éventuelle ait bien ses instructions alignées sur 4 octets.
 
 Reprenons le programme accesmem32 dans lequel nous avons des exemples de définitions des données. Puis dans la partie code, nous commençons par charger l’adresse de la donnée iValeur1 dans le registre r0 pour l’afficher en hexadécimal. Cette adresse est définie à la fin du corps du programme avec l’instruction 
+```asm
 iAdriValeur1:           .int iValeur1
+```
+
 Puis nous chargeons la valeur contenue à cette adresse dans le registre r0 avec l’instruction 
+```asm
 ldr r0,[r1]
+```
+
 valeur que nous affichons en hexadécimal. Notez bien la différence entre les 2 instructions : la première charge dans un registre l’adresse, la deuxième avec le registre entre crochets charge la valeur contenue à cette adresse mémoire.
+
 Dans notre exemple, vous trouvez une valeur dans les 0x20000 pour l ‘adresse  et la valeur 0x12345678 pour le contenu, ce qui est bien la valeur définie dans notre .data .
 
 Il existe une autre façon de charger l’adresse d’une donnée c’est d’utiliser l’instruction 
+```asm
 ldr r1,=iValeur1
+```
+
 Et cette fois ci, nul besoin de déclarer une instruction 
+```asm
 iAdriValeur1:           .int iValeur1
+```
+
 pour que cela fonctionne. En effet c’est le compilateur qui va effectuer cette déclaration à la fin du programme : déclaration transparente pour vous.
+
 Mais attention, pour de gros programmes assembleur (plus de 1000 instruction de 4 octets), le compilateur générera une erreur bizarre car l’écart entre l’instruction ldr et la définition dépassera 4096 caractères.
+
 C’est pourquoi je conseille de prendre l’habitude de déclarer soit même les adresses (et de mettre comme préfixe iAdr).
 
 Ensuite nous trouvons un exemple pour charger le premier octet de l’entier iValeur1 avec l’instruction 
+```asm
 ldrb r0,[r1]
+```
+
 Mais c’est curieux c’est la valeur hexa 78 qui est affichée et pas la valeur 12 !! 
 Ceci est normal car il y a 2 façons de stocker un entier dans la mémoire : les octets de poids fort en premier c’est  le gros-boutiste ou big-endian 
+
 ou les octets de poids faible en premier : petit-boutiste ou little-endian 
+
 Voir sur wikipédia les précisions et les explications  amusantes de ces termes.
+
 La manière de stocker les entiers peut être modifiée mais je vous déconseille de le faire !!!
 
 Maintenant nous chargeons le deuxième octet qui se trouve en position 1 (le premier étant en position 0) avec l’instruction :
