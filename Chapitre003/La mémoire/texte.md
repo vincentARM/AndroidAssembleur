@@ -1,4 +1,5 @@
 Vu d’un programme assembleur, la mémoire mis à sa disposition par le système d’exploitation est divisée en plusieurs zones : 
+
         * .data : qui contient les données initialisées par le programmeur
         
         * .bss : qui contient les données initialisées à zéro par le système d’exploitation au chargement du programme
