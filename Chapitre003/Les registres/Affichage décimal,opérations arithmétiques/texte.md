@@ -307,6 +307,12 @@ Ceci est valable pour des nombres signés ou non signés.
 Maintenant si nous effectuons un déplacement de bits sur la droite avec l'instruction lsr, cela correspond à une division par des puissance de 2.
 Mais attention, dans ce cas cela n'est valable que pour les divisions non signées. Sinon il faut utiliser l'instruction asr qui dupliquera le dernier bit et donc conservera le signe du nombre.
 
-En fin le programme se termine en calculant la valeur absolue d'un nombre. Il suffit que la première instruction (ici un movs) effectue la mise à jour des indicateurs d'état pour inverser la valeur si celle ci est négative avec l'instruction negmi.
+Ensuite nous calculons la valeur absolue d'un nombre. Il suffit que la première instruction (ici un movs) effectue la mise à jour des indicateurs d'état pour inverser la valeur si celle ci est négative avec l'instruction negmi.
+
+Et pour terminer, nous écrivons une macro d'affichage du contenu du registre r0 en héxadécimal.
+Il suffit d'appeler la macro affreghexa Exemple1 pour avoir le résultat :
+
+Exemple1 : Valeur hexa du registre : 00001234
+
 
 
