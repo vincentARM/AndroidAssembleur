@@ -292,3 +292,13 @@ De plus aucun indicateur d’état n’est positionné lors de ces divisions.
 Dans le programme division32.s, nous nous contentons de tester ces 2 instructions et de calculer le reste avec l’instruction mls.
 
 Vous remarquerez que si nous pouvons multiplier 2 registres de 32 bits pour avoir un résultat sur 64 bits, il n’y a pas de division de 64 bits par un registre 32 bits !! Il faudra écrire soit même la routine de division si elle est necessaire dans un calcul.
+
+### exemples particuliers
+Dans le programme operPar32.s nous allons voir quelques exemples d'opérations particulières et fort utiles.
+
+Tout d'abord, nous trouvons un test por determiner si un nombre est pair ou impair. Il suffit de tester le bit 0 avex une instruction rst r0,#1.
+
+Puis nous regardons quelle est l'incidence sur un nombre en base 10 du décalage d'un bit vers la gauche. Vous voyez que cette opération consiste en une multiplication par 2.
+
+Si on déplace les bits de 2 positions vers la gauche, nous aurons une multiplication par 2. A chaque déplacement vers la gauche , nous avons donc une multiplication par une puissance de 2.
+
