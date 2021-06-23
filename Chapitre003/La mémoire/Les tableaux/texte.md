@@ -13,7 +13,7 @@ mais nous allons utiliser une astuce qui nous facilite les ajouts futurs. Nous u
 ```asm
 .equ NBELEMENTS,  (. - tbValeurs) / 4
 ```
-qui calcule la différence entre l’adresse courante de cette pseudo instruction indiquer par le . Et l’adresse du début du tableau  donnée par son étiquette. Ceci donne en fait la taille en octet de la totalité du tableau. Comme il s’agit d’entiers de 4 octets nous divisons par 4 pour avoir le nombre d’éléments du tableau.
+qui calcule la différence entre l’adresse courante de cette pseudo instruction indiquée par le . et l’adresse du début du tableau  donnée par son étiquette. Ceci donne en fait la taille en octets de la totalité du tableau. Comme il s’agit d’entiers de 4 octets nous divisons par 4 pour avoir le nombre d’éléments du tableau.
 
 Il est donc par la suite facile d’ajouter un élément à la suite du 8 et le nombre d’élements sera recalculé automatiquement.
 
