@@ -1,5 +1,5 @@
 ### Les tableaux.
-Dans le programme Tableaux32.s nous allons voir comment décrire et utiliser un tableau d’entiers.
+Dans le programme tableau32.s nous allons voir comment décrire et utiliser un tableau d’entiers.
 
 Dans la .data, nous déclarons un tableau de 8 entiers (donc de longueur égale à 4 octets chacun) avec l’instruction :
 ```asm
