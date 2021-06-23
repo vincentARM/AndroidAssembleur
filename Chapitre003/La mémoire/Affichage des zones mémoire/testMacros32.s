@@ -1,6 +1,6 @@
 /* ARM assembleur Android termux  32 bits */
-/*  program squel32.s   */
-/* squelette de programme assembleur 32 bits   */
+/*  program testMacros32.s   */
+/* tests des macros d'affichage  32 bits   */
 /**************************************/
 /* Constantes                         */
 /**************************************/
