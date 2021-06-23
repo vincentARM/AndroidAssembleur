@@ -134,19 +134,21 @@ ldm r0,{r1-r3}
 dans ce cas, r0 contient l’adresse de la première valeur qui sera chargée dans le registre r1, puis la deuxième valeur (et comme ldm concerne les entiers, l’adresse sera celle de r0 + 4 ) dans r2 puis la 3ième valeur (donc à l’adresse r0+8) dans le registre r3.
 
 Remarquez que la liste des registre est encadrée par des {} et il aurait été possible d’écrire 
-
+```asm
 ldm r0,{r1,r2,r3}
-
+```
 puis nous effectuons le chargement d’une valeur de 8 octets dans 2 registres avec l’instruction 
-
+```asm
 ldrd r2,r3,[r1]
-
+```
 Le premier registre doit être un registre pair et le second soit être le successeur du premier !!
 
 r1 contenant l’adresse du début de la zone de 8 octets. R2 contiendra les 4 octets finaux et r3 les 4 octets du début.
 
-Enfin le programme se termine par un exemple du stockage d’un entier en mémoire avec l’instruction str r1 ,[r2]
-
+Enfin le programme se termine par un exemple du stockage d’un entier en mémoire avec l’instruction 
+```asm
+str r1 ,[r2]
+```
 Remarque : c’est bien le contenu de r1 qui est stocké à l’adresse contenue dans r2.
 
 Tout ce que l’on a vu pour l’instruction ldr (ou ldm) est applicable à l’instruction str (ou stm).
