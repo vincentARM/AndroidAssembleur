@@ -13,3 +13,7 @@ Vu d’un programme assembleur, la mémoire mis à sa disposition par le systèm
         * D’autres zones sont possibles d’usage particulier et définies par l’éditeur de lien.
         
 L’ordre des 3 premières zones en mémoire est défini par les directives du linker mais en règle générale on trouve la section .text puis la .data puis la .bss. Mais leur définition dans le programme source peut être quelconque.
+
+Comme les registres ne peuvent contenir que 32 bits soit 4 octets, toutes les autres structures de données (chaine de caractères, tableaux, liste chainées, arbres, piles etc.) ne peuvent être stockées que dans la mémoire.
+
+Seuls les pointeurs vers ces structures pourront être conservés dans les registres.
