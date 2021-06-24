@@ -20,7 +20,7 @@ découverte de l'assembleur ARM sur smarphone ou tablette Android. Discovery of 
      * [Chapitre 3.2.1 : les accès mémoire.](https://github.com/vincentARM/AndroidAssembleur/tree/main/Chapitre003/La%20m%C3%A9moire/Les%20acc%C3%A8s%20m%C3%A9moire)
      * [Chapitre 3.2.2 : affichage des zones mémoire.](https://github.com/vincentARM/AndroidAssembleur/tree/main/Chapitre003/La%20m%C3%A9moire/Affichage%20des%20zones%20m%C3%A9moire)
      * [Chapitre 3.2.3 : les tableaux.](https://github.com/vincentARM/AndroidAssembleur/tree/main/Chapitre003/La%20m%C3%A9moire/Les%20tableaux)
-     * [Chapitre 3.2.4 : les chaînes de caractères](https://github.com/vincentARM/AndroidAssembleur/tree/main/Chapitre003/La%20m%C3%A9moire/Les%20cha%C3%AEnes%20de%20caract%C3%A8res
+     * [Chapitre 3.2.4 : les chaînes de caractères](https://github.com/vincentARM/AndroidAssembleur/tree/main/Chapitre003/La%20m%C3%A9moire/Les%20cha%C3%AEnes%20de%20caract%C3%A8res)
 
 
  
