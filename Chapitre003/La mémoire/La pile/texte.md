@@ -22,29 +22,42 @@ push {r0-r4}
 Dans ce cas ce sont les registres r0,r1,r2,r3 et r4 qui sont stockés sur la pile.
 
 Pour récupérer les valeurs de la pile, nous utilisons l’instruction 
-pop {r0
-
+```asm
+pop {r0}
+```
 Celle ci charge la valeur se trouvant à l’adresse du registre sp dans le registre r0 et incrémente de 4 octets  l’adresse contenue dans le registre sp.
 
 Le registre peut bien sur être différent du registre qui a mis la valeur sur la pile mais il faut toujours en fin de routine avoir fait autant de pop que de push ou plus exactement avoir enlevé autant de valeurs que nous en avions mis. 
 
 Vous remarquez donc que les valeurs sont dépilées dans l’ordre inverse à leur empilement.
+
 Dans le programme pile32.s nous allons voir 2 utilisations de la pile.
+
 La première est le passage de paramètres à une routine. Au lieu de les passer par les registres (r0 à r3) nous les stockons sur la pile, et c’est la routine qui va les récupérer pour les traiter.
+
 La routine lireValeur va extraire d’un tableau la nième valeur de ce tableau. 
+
 L’adresse du tableau et la valeur N seront passés par la pile avec l’instruction 
+```asm
 push {r0,r4} 
+```
 Les registres doivent être dans l’ordre de leur N°.
 
 Dans la routine, nous commençons par sauvegarder les 3 registres qui seront utilisés. Puis nous mettons dans le registre fp, la somme de l’adresse de la pile contenue dans le registre sp et 12 octets.
+
 Le registre fp (frame pointer) est en fait le registre r11 qui est utilisé habituellement pour stocker l’adresse de la pile en un instant donné. Ici comme nous venons de faire 3 pushs, nous positionnons dans fp l’adresse de la pile avant ces 3 push.
+
 Comme cela nous nous retrouvons au niveau de la 1ere valeur stockée par le push {r0,r4} cad le N° du poste demandé.
+
 A l’adresse fp + 4 nous trouvons la 2ième valeur stockée cad l’adresse du tableau et il ne nous reste plus qu’à faire une instruction de chargement  ldr r0,[r0,r1,lsl #2] pour retourner la valeur du poste.
+
 Remarque : nous ne vérifions pas que le numéro de poste demandé est inférieur au nombre de poste total du tableau  ce qui n’est pas bien !!!
 
 En fin de routine, nous restaurons les 3 registres.
-Mais il manque quelque chose !! En effet, nous avons fait un push de 2 registres dans le programme appelant ce qui a diminué l’adresse de la pile de 8 octets et donc il nous faut la remettre en l’état avec l’instruction add sp,#8.
-
+Mais il manque quelque chose !! En effet, nous avons fait un push de 2 registres dans le programme appelant ce qui a diminué l’adresse de la pile de 8 octets et donc il nous faut la remettre en l’état avec l’instruction 
+```asm
+add sp,#8
+```
 Ensuite nous effectuons un deuxième appel mais en faisant 2 push d’un seul registre. Vous remarquerez qu’il faut inverser l’ordre des  2 registres pour que la routine fonctionne. 
 
 Puis nous allons voir la possibilité d’utiliser la pile comme stockage de valeurs temporaires à l’intérieur de la routine extractSousTableau. 
