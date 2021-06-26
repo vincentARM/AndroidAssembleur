@@ -4,7 +4,7 @@ Dans l »assembleur ARM, il n’existe pas d’instructions d’entrées sortie
 
 Mais nos programmes assembleur lancés sous linux, ne peuvent pas accéder à ces adresses, ils sont obligés de passer par des appels au système d’exploitation.
 
-Noua vons vu le cas dès le premier programme pour afficher un message où nous avons dû faire appel à la fonction Write de Linux.
+Nous avons vu le cas dès le premier programme pour afficher un message où nous avons dû faire appel à la fonction Write de Linux.
 
 Dans le programme saisie32.s nous allons voir comment lire une chaîne de caractère saisie dans le terminal quel qu’il soit. Ce peut être le clavier du smartphone ou le clavier du terminal sous lequel vous êtes connecté par ssh.
 
