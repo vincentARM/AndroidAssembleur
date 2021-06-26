@@ -1,6 +1,6 @@
 ### Appel à des routines C
 
-Il est possible d’utiliser des fonctions du langage C ou d’appeler des fonctions de bibliothèque externes depuis l’assembleur.
+Il est possible d’utiliser des fonctions du langage C ou d’appeler des fonctions de bibliothèques externes depuis l’assembleur.
 
 Pour cela dans le programme appelC32.s nous allons nous contenter d’appeler la fonction printf du langage C.
 
