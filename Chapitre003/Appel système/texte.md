@@ -165,11 +165,16 @@ Puis nous ouvrons le fichier en utilisant l’appel système OPEN (code 5) en  p
 Nous testons le code retour et s’il est négatif nous signalons une erreur. Ce test est obligatoire car le fichier peut ne pas exister, ou l’opérateur a pu faire une erreur de saisie.
 
 Si l’ouverture est correcte, le code retour correspond au descripteur de fichier (File Descripor) attribué par le système, FD que nous sauvons dans un registre. Puis  nous utilisons l’appel système READ pour lire le fichier dans un buffer de lecture assez grand pour contenir la totalité du fichier.
+
 Nous testons aussi le code retour et s’il est positif, nous l’affichons et le contenu du buffer de lecture. 
 Vous pouvez constater qu’il contient bien les données du fichier.
+
 Nous continuons en demandant le nom du fichier à écrire et nous le créons en utilisant l’appel système CREATE. Remarquez que nous passons un code de création en octol et qui correspond aux droits attribués au fichier crée.
+
 Si la création est OK, nous sauvegardons dans un registre le File Descriptor attribué et nous écrivons 10 caractères dans le fichier à partir du buffer de lecture avec l’appel système WRITE.
-Si tout se passe bien, nous fermons les 2 fichiers avec l’appel système CLOSE
+
+Si tout se passe bien, nous fermons les 2 fichiers avec l’appel système CLOSE.
+
 Voici l’éxecution du programme :
 ```
 Début du programme 32 bits.
