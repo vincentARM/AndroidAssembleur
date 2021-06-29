@@ -4,7 +4,7 @@ Jusqu’à maintenant, nous n »avons traité que des valeurs entières contenu
 
 Ces nombres peuvent être de 2 formats : .float de longueur 32 bits (simple précision) .double de 64 bits(double précision).
 
-Ils sont définis par la norme IEE et seront manipulés par l’assembleur dans des registres spéciaux et des instructions particulières.
+Ils sont définis par la norme IEEE754 (voir wikipedia) et seront manipulés par l’assembleur dans des registres spéciaux et des instructions particulières.
 
 Nous trouvons 16 registres doubles de 64 bits : d0 à d15 mais qui peuvent être utilisés en 32 bits ce qui fait 32 registres s0 à s31. Par exemple, les registres s0 et s1 sont équivalent au registre d0.
 
@@ -18,8 +18,10 @@ Par exemple :
 ```
 L’affichage des valeurs pose un problème car le décodage est assez complexe. Pour la facilité nous utiliserons l’appel à la fonction printf du langage C en utilisant l’indicateur %f.
 
-Si vous tenez à rester en full assembleur, vous trouverez au chapitre 90 du site 
+Si vous tenez à rester en full assembleur, vous trouverez au chapitre 90 du site :
+
 https://assembleurarmpi.blogspot.com/2020/09/chapitre-90-assembleur-arm-32-bits.html
+
 une routine en assembleur qui utilise l’algorithme grisu de Florian Loitsch.
 
 Lors de la compilation d’un programme assembleur qui utilise ces nombres, vous pouvez avoir une erreur qui signale que le processeur ne gére pas ce type de nombre. Dans ce cas il faut ajouter dans le script de compilation les directives ci après :
@@ -58,11 +60,13 @@ Donc sauf impératif, il vaut mieux effectuer les calculs avec des doubles !!
 Puis nous effectuons la conversion d’un entier contenu dans le registre r0 et nous affichons le résultat.
 Puis nous trouvons des exemples d’addition, soustraction et division.
 Vous trouverez la liste des instructions sur la carte de référence en téléchargeant le pdf sur ce site :
+
 https://developer.arm.com/documentation/qrc0007/e/
 
 Nous terminons en extrayant la partie entière d’un double et en l’affichant puis par la comparaison de 2 doubles. Il faut après transférer les indicateurs dans le registre d’état pour pouvoir utiliser les résultats de la comparaison avec l’instruction :
+```asm
 vmrs apsr_nzcv,fpscr
-
+```
 Voici le résultat de l’exécution :
 ```
 Début du programme 32 bits.
