@@ -27,6 +27,7 @@ découverte de l'assembleur ARM sur smarphone ou tablette Android. Discovery of 
   * [Chapitre 3.4 : appels fonctions langage C](https://github.com/vincentARM/AndroidAssembleur/tree/main/Chapitre003/Fonctions%20langage%20C)
   * [Chapitre 3.5 : nombres en virgule flottante](https://github.com/vincentARM/AndroidAssembleur/tree/main/Chapitre003/Nombres%20en%20virgule%20flottante)
   * [Chapitre 3.6 : contrôle du flux d'instructions](https://github.com/vincentARM/AndroidAssembleur/tree/main/Chapitre003/Contr%C3%B4le%20du%20flux%20d'instructions)
+  * [Chapitre 3.7 : dessiner avec X11](https://github.com/vincentARM/AndroidAssembleur/tree/main/Chapitre003/Dessiner%20avec%20X11)
 
 
  
