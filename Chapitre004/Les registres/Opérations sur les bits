@@ -55,7 +55,7 @@ Le programme continue avec les opérateur OU, OU exclusif, NON et la remise à z
 Voici le résultat complet :
 ```
 Début programme.
-Affichage binaire :
+Affichage binaire : 
 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000011
 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00001010
 Résultat opération ET :
