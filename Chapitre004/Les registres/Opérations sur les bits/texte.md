@@ -52,18 +52,23 @@ Résultat opération ET :
 Vous voyez que seul le deuxième bit passe à 1 puisque les 2 registres ont seulement ce bit à 1 simultanément.
 
 Le programme continue avec les opérateur OU, OU exclusif, NON et la remise à zéro d’un ou plusieurs bits.
+En 64 bits il y a aussi 2 opérateurs supplémentaires orn qui combine le OU et le NON et eon qui combine le OU exclusif et le NON
 Voici le résultat complet :
 ```
 Début programme.
-Affichage binaire : 
+Affichage binaire :
 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000011
 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00001010
 Résultat opération ET :
 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000010
 Résultat opération OU :
 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00001011
+Résultat opération OU et NON :
+11111111 11111111 11111111 11111111 11111111 11111111 11111111 11110111
 Résultat opération OU exclusif :
 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00001001
+Résultat opération OU exclusif et NON :
+11111111 11111111 11111111 11111111 11111111 11111111 11111111 11110110
 Résultat opération NON  :
 11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111100
 Résultat opération RAZ bit  :
