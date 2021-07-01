@@ -1,7 +1,7 @@
 /* Programme assembleur ARM android avec Termux */
 /* Assembleur 64 bits ARM   */
-/* Programme operBin64.s */
-/* opérations logique sur les bits  */
+/* Programme deplBits64.s */
+/* Déplacement de bitses bits  */
 
 /************************************/
 /* Constantes                       */
@@ -13,16 +13,16 @@
 /* Données initialisées          */
 /*********************************/
 .data
-szMessDebutPgm:      .asciz "Début programme.\n"
-szMessFinPgm:        .asciz "Fin normale du programme. \n"
-szMessAffBin:        .asciz "Affichage binaire :\n"
-szMessAffBinET:      .asciz "Résultat opération ET :\n"
-szMessAffBinOU:      .asciz "Résultat opération OU :\n"
-szMessAffBinOUN:     .asciz "Résultat opération OU et NON :\n"
-szMessAffBinXOR:     .asciz "Résultat opération OU exclusif :\n"
-szMessAffBinEON:     .asciz "Résultat opération OU exclusif et NON :\n"
-szMessAffBinNON:     .asciz "Résultat opération NON  :\n"
-szMessAffBinCLR:     .asciz "Résultat opération RAZ bit  :\n"
+szMessDebutPgm:       .asciz "Début programme.\n"
+szMessFinPgm:         .asciz "Fin normale du programme. \n"
+szMessAffDeplGau:     .asciz "Résultat déplacement gauche :\n"
+szMessAffDeplDro:     .asciz "Résultat déplacement droit :\n"
+szMessAffDeplAri:     .asciz "Résultat déplacement droit arithmétique :\n"
+szMessAffBinRot:      .asciz "Résultat rotation droite :\n"
+szMessAffDeplR:       .asciz "Résultat deplacement droit avec récupération bit : \n"
+
+
+
 szZoneBin:        .space 76,' '
                  .asciz "\n"
 /*********************************/
@@ -37,52 +37,42 @@ szZoneBin:        .space 76,' '
 main:                               // point d'entrée du programme
     ldr x0,qAdrszMessDebutPgm
     bl afficherMess
-    ldr x0,qAdrszZoneMessBin
-    bl afficherMess
+
     
-    mov x1,#0b0011
-    mov x2,#0b1010
-    mov x0,x1                      // affichage des 2 registres 
+    mov x1,#0b1110011
+    mov x0,x1                      // affichage du registre de départ
     bl afficherBinaire
+    
+    ldr x0,qAdrszMessAffDeplGau    // titre
+    bl afficherMess
+    lsl x0,x1,#5                   // déplacement de 5 positions à gauche
+    bl afficherBinaire
+    ldr x0,qAdrszMessAffDeplDro    // titre
+    bl afficherMess
+    mov x2,#3
+    lsr x0,x1,x2                   // déplacement de 3 positions sur la droite
+    bl afficherBinaire
+    ldr x0,qAdrszMessAffBinRot     // titre
+    bl afficherMess
+    ror x0,x1,#3                   // rotation sur la droite de 3 positions 
+    bl afficherBinaire
+    ldr x0,qAdrszMessAffDeplAri     // titre
+    bl afficherMess
+    lsl x2,x1,#57
     mov x0,x2
     bl afficherBinaire
-    
-    ldr x0,qAdrszMessAffBinET      // titre
-    bl afficherMess
-    and x0,x1,x2                   // opérateur ET
-    bl afficherBinaire
-    ldr x0,qAdrszMessAffBinOU      // titre
-    bl afficherMess
-    orr x0,x1,x2                   // opérateur OU
-    bl afficherBinaire
-    ldr x0,qAdrszMessAffBinOUN      // titre
-    bl afficherMess
-    orn x0,x1,x2                   // opérateur OU et NOT
+    asr x0,x2,#4                  // opérateur asr
     bl afficherBinaire
     
-    ldr x0,qAdrszMessAffBinXOR     // titre
+    ldr x0,qAdrszMessAffDeplGau
     bl afficherMess
-    eor x0,x1,x2                   // opérateur OU exclusif
-    bl afficherBinaire
-    
-    ldr x0,qAdrszMessAffBinEON     // titre
-    bl afficherMess
-    eon x0,x1,x2                   // opérateur OU exclusif et NOT
-    bl afficherBinaire
-    
-    ldr x0,qAdrszMessAffBinNON     // titre
-    bl afficherMess
-    mvn x0,x1                      // opérateur NON
-    bl afficherBinaire
-    
-    ldr x0,qAdrszMessAffBinCLR     // titre
-    bl afficherMess
-    mov x0,#0
-    mvn x0,x0
-    bic x0,x0,0b11000                // opérateur RAZ 4 et 5ième bits
+    mov x2,#0b11                   // maj x2 
+    mov x0,x2,lsl #8               // copie dans x0 après déplacement à gauche de 8 bits
     bl afficherBinaire
     
     
+    ldr x0,qAdrszMessFinPgm
+    bl afficherMess
     
 100:                            // fin standard
     mov x0,0                    // code retour
@@ -90,14 +80,12 @@ main:                               // point d'entrée du programme
     svc #0
 
 qAdrszMessDebutPgm:    .quad szMessDebutPgm
-qAdrszZoneMessBin:     .quad szMessAffBin
-qAdrszMessAffBinET:    .quad szMessAffBinET
-qAdrszMessAffBinOU:    .quad szMessAffBinOU
-qAdrszMessAffBinOUN:   .quad szMessAffBinOUN
-qAdrszMessAffBinXOR:   .quad szMessAffBinXOR
-qAdrszMessAffBinNON:   .quad szMessAffBinNON
-qAdrszMessAffBinCLR:   .quad szMessAffBinCLR
-qAdrszMessAffBinEON :  .quad szMessAffBinEON 
+qAdrszMessFinPgm:       .quad szMessFinPgm
+qAdrszMessAffDeplGau:   .quad szMessAffDeplGau
+qAdrszMessAffDeplDro:   .quad szMessAffDeplDro
+qAdrszMessAffBinRot:    .quad szMessAffBinRot
+qAdrszMessAffDeplAri:   .quad szMessAffDeplAri
+qAdrszMessAffDeplR:     .quad szMessAffDeplR
 /******************************************************************/
 /*     affichage d'un registre 64 bits en binaire                 */ 
 /******************************************************************/
