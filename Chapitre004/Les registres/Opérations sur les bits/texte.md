@@ -21,6 +21,8 @@ Dans le corps du programme nous mettons la valeur binaire 0b111 (soit 7 en déci
 
 Puis nous mettons 1 dans le registre x1 et nous faisons l’addition des 2 registres. Le résultat donne 1000 en binaire ce qui correspond à 8 décimal.
 
+Remarque : en 64 bits, le # n'est pas obligatoire devant une valeur immédiate.
+
 Voici le résultat de l’exécution :
 ```
 Début programme.
