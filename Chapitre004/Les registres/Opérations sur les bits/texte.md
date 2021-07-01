@@ -75,3 +75,68 @@ Résultat opération RAZ bit  :
 11111111 11111111 11111111 11111111 11111111 11111111 11111111 11100111
 ```
 Si vous avez programmé en ARM 32 bits, vous remarquez quelques petites différences dans les instructions 64 bits : par exemple l’assembleur 64 bits n’accepte pas l’instruction bic x0,0b11000, il faut écrire bic x0,x0,0b11000
+
+### Déplacements de bits
+
+Maintenant nous allons voir une autre série d’opérations autorisées : les déplacements :
+Dans le programme deplBits32.s Nous mettons la valeur 0b1110011 dans le registre x1 pour suivre les différents déplacements.
+Nous commençons par déplacer tous les bits du registre de 5 positions sur la gauche avec l’ instruction :
+```asm
+lsl x0,x1,5
+```
+Voici le résultat : 
+```
+Début programme.
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 01110011
+Résultat déplacement gauche :
+00000000 00000000 00000000 00000000 00000000 00000000 00001110 01100000
+```
+Les bits les plus à gauche sont perdus et les nouveaux bits à droite sont mis à 0.
+Puis nous déplaçons toujours les bits du registre x1 de 3 positions sur la droite : positions contenues dans le registre x2 :
+```asm
+    mov x2,#3
+    lsr x0,x1,x2                   // déplacement de 3 positions sur la droite
+```
+Dans ce cas, les bits à droite sont perdus et les nouveaux bits à gauche sont mis à 0. Puis nous effectuons une rotation à droite de 3 positions avec l’instruction : 
+```asm
+    ror x0,x1,#3    
+```
+Dans ce cas les bits qui sortent de la droite sont mis à gauche.
+
+Particularité : avec l’opérateur asr, un déplacement sur la droite met un ou des 1 à gauche si le dernier bit (bit 63) est un 1 sinon il met des zéros. Nous verrons son utilité plus tard.
+
+Exemple :
+```asm
+    lsl x2,x1,#57
+    mov x0,x2
+    bl afficherBinaire
+    asr x0,x2,#4                  // opérateur asr
+    bl afficherBinaire
+```
+Remarque : en 64 bits il n’est pas possible de récupérer le bit perdu lors des déplacements. L’instruction rrx n’existe pas non plus.
+
+
+Enfin il est possible gràce à un mécanisme (barrel shifter ) d'effectuer un déplacement de bits avant de copier le résultat dans un registre dans une même instruction : Par exemple, déplacement de 8 positions des bits de rx et copie du résultat dans x0 : 
+```asm
+    mov x2,#0b11                   // maj x2 
+    mov x0,x2,lsl #8               // copie dans x0 après déplacement à gauche de 8 bits
+    bl afficherBinaire
+```
+Remarque : x2 n'est pas affecté par cette opération, le déplacement est fait en interne. Il est possible d'utiliser aussi lsr, asr et ror.
+Voici le résultat complet de l'exécution :
+```
+Début programme.
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 01110011
+Résultat déplacement gauche :
+00000000 00000000 00000000 00000000 00000000 00000000 00001110 01100000
+Résultat déplacement droit :
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00001110
+Résultat rotation droite :
+01100000 00000000 00000000 00000000 00000000 00000000 00000000 00001110
+Résultat déplacement droit arithmétique :
+11100110 00000000 00000000 00000000 00000000 00000000 00000000 00000000
+11111110 01100000 00000000 00000000 00000000 00000000 00000000 00000000
+Résultat déplacement gauche :
+00000000 00000000 00000000 00000000 00000000 00000000 00000011 00000000
+Fin normale du programme.
+```
