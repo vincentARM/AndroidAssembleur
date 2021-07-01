@@ -79,7 +79,9 @@ Si vous avez programmé en ARM 32 bits, vous remarquez quelques petites différe
 ### Déplacements de bits
 
 Maintenant nous allons voir une autre série d’opérations autorisées : les déplacements :
-Dans le programme deplBits32.s Nous mettons la valeur 0b1110011 dans le registre x1 pour suivre les différents déplacements.
+
+Dans le programme deplBits64.s Nous mettons la valeur 0b1110011 dans le registre x1 pour suivre les différents déplacements.
+
 Nous commençons par déplacer tous les bits du registre de 5 positions sur la gauche avec l’ instruction :
 ```asm
 lsl x0,x1,5
