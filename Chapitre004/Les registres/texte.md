@@ -4,6 +4,8 @@ Les registres sont une partie très importante de tout processeur. La plupart de
 
 Un registre est un minuscule composant électronique qui comporte 64 minuscules interrupteurs qui peuvent prendre les valeurs 0 ou 1.
 
+La taille des registres indique donc le type d'assembleur (32 ou 64 bits), les instructions ont toujours une taille de 32 bits mais elle vous autorisent à manipuler des données de la taille d'un bit, d'un ou 2 ou 4 ou 8 octets. 
+
 Pour un processeur ARM 64 bits, nous disposons de 31 registres de 64 bits chacun :
 * 29 registres généraux  de x0 à x28
 * un registre de cadre fp ou x29
