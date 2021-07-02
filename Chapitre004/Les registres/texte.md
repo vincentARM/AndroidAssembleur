@@ -10,9 +10,14 @@ Pour un processeur ARM 64 bits, nous disposons de 31 registres de 64 bits chacun
 * 29 registres généraux  de x0 à x28
 * un registre de cadre fp ou x29
 * un registre de lien contenant l’adresse de retour d’une routine lr ou x30
-* plus le registre de pile sp
-* plus le registre de compteur d’instruction pc
-* plus un registre particulier qui ne contient que 0 : xzr
+* 
+et des registres spéciaux :
+* le registre de pile sp
+* le registre de compteur d’instruction pc
+* un registre particulier qui ne contient que 0 : xzr
+* le registre d'état 
+
+et d'autres registres concernant les nombres en virgule flottante.
 
 Les registres d'usages généraux peuvent être utilisés pour toutes les opérations.
 
