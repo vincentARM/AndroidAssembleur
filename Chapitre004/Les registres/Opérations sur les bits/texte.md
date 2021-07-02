@@ -35,7 +35,7 @@ Les bits à droite représentent de faibles valeurs et sont dit bits de poids fa
 
 Comme les instructions ne font que 4 octets de long, il n’est pas possible avec une seule instruction mov de stocker toutes les valeurs possibles. Il n’est possible de stocker que les valeurs de 0 à 65535 soit en binaire 0b1111111111111111.
 
-Opérations logiques 
+### Opérations logiques 
 
 L’assembleur permet d’effectuer les opérations logiques ET, OU, OU exclusif, négation et l’opération de remise à zéro d’un seul bit.
 
@@ -142,5 +142,78 @@ Résultat déplacement droit arithmétique :
 11111110 01100000 00000000 00000000 00000000 00000000 00000000 00000000
 Résultat déplacement gauche :
 00000000 00000000 00000000 00000000 00000000 00000000 00000011 00000000
+Fin normale du programme.
+```
+### Autres instructions de manipulation des bits 
+
+Dans le programme manipBits64.s nous allons voir d’autres instructions de manipulation de bits.
+
+Avec l’instruction clz, nous pouvons compter le nombre de bits à 0 se trouvant dans les positions gauche d’ un registre. Dans l’exemple nous trouvons 0b111001 ce qui correspond en décimal à 57
+
+Avec l’instruction cls, nous pouvons compter le nombre de 1 se trouvant à gauche. Curieusement, le comptage indique 1 de moins que le nombre de 1 !! Il doit y avoir une explication.
+Dans l’exemple le programme trouve 0b111000 ce qui correspond à 56 et il y a 57 1 !!
+
+Ensuite nous testons l’instruction :
+```asm
+bfi x0,x1,#20,#3
+```
+Elle copie 3 bits se trouvant à la position 0 de x1 à la position 20 de x0. Dans ce cas les autres bits de x0 ne sont pas remis à zéro.
+Cette instruction peut être intéressante pour remplacer un octet complet dans un registre 
+```asm
+mov x1,0b11111111
+bfi  x0,x1,24,8          @ met le premier octet de x1 dans le 3ième octet de x0
+```
+L’instruction suivante 
+```asm
+bfxil x0,x1,#4,#3
+```
+fait l’inverse. Elle met 4 bits se trouvant à la position 3 de x1 à la position 0 de x0. Elle permet donc d’extraire un octet quelconque d’un registre.
+
+L’instruction extr extrait n bits d’un registre et les mets à gauche des bits d’un autre registre. Les n bits à droite sont perdus.
+
+L’instruction rbit permet d’inverser les 64 bits d’un registre, l’instruction rec inverse l’ordre des 8 octets d’un registre, rev16 inverse les 2 octets d’un demi mot et rev32 inverse les 4 octets d’un mot (voir les exemples).
+
+Les instructions ubfiz et sbfiz font la même chose que bfi mais initialise d’abord le registre de destination.
+
+Enfin l’instruction sxtw  etend les bits d’un registre 32 bits dans un registre 64 bits. Remarquez l’utilisation de la notation w2 pour indiquer la partie basse de 32 bits du registre x0.
+Voici le résultat complet de l’éxécution :
+```
+Début programme.
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 01110011
+Comptage des zéros à gauche :
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00111001
+comptage des 1 à gauche  :
+11111111 11111111 11111111 11111111 11111111 11111111 11111111 10001100
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00111000
+Copie de n bits à la position p :
+00000000 00000000 00000000 00000000 00000000 00110000 00000000 00000000
+Copie de p bits à la position n :
+00000000 00000000 00000000 00000000 00000000 01000001 00010001 01100001
+00000000 00000000 00000000 00000000 00000000 01000001 00010001 01100111
+Ajout à gauche de p bits :
+00110000 00000000 00000000 00000000 00000000 00000000 00000000 00111100
+Inversion des 64 bits du registre :
+11001110 00000000 00000000 00000000 00000000 00000000 00000000 00000000
+Inversion ordre octets  :
+00000000 00000000 00000000 00000000 00000000 01000001 00010001 11000111
+11001100 11110000 00000000 00000000 00000000 00000000 00000000 00000000
+00000000 00000000 00000000 00000000 00000000 00000000 11110000 11001100
+Inversion ordre demi mots  :
+00000000 00000000 00000000 00000000 00000000 01000001 00010001 11100010
+00000000 00000000 00000000 00000000 00000000 00000000 11001100 11110000
+00000000 00000000 00000000 00000000 00000000 00000000 11110000 11001100
+Inversion ordre des mots  :
+00000000 00000000 00000000 00000000 00000000 01000001 00010010 00000000
+00000000 00000000 00000000 00000000 11001100 11110000 00000000 00000000
+00000000 00000000 00000000 00000000 00000000 00000000 11110000 11001100
+Raz registre puis copie bits  :
+00000000 00000000 00000000 00000000 00000000 01000001 00010010 00011101
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 01100000
+Raz registre avec signe puis copie bits  :
+11111111 11111111 11111111 11111111 11111111 10111110 11101101 11000001
+11111111 11111111 11111111 11111111 11111111 11111111 11111111 11100000
+Extension 32 bits :
+00000000 00000000 00000000 00000000 11111111 11111111 11111111 10001100
+11111111 11111111 11111111 11111111 11111111 11111111 11111111 10001100
 Fin normale du programme.
 ```
