@@ -76,3 +76,88 @@ parties hautes :
 8
 Fin normale du programme.
 ```
+### Soustractions :
+
+Maintenant nous allons utiliser l’instruction sub pour effectuer des soustractions dans le programme soustraction64.s.
+
+Nous effectuons une soustraction simple puis une soustraction dont le résultat est manifestement faux.
+
+La aussi comme pour l’addition, si nous utilisons l’instruction subs, l’indicateur carry du registre d’état est positionné mais attention il est mis à zéro s’il faut une retenue et sinon il est mis à 1.
+
+Comme pour l’addition, nous pouvons utiliser l’instruction sbc pour tenir compte de la retenue lors de soustractions successives.
+
+Mais la soustraction pose un problème intéressant : comment gérer les nombres négatifs ?
+
+En effet jusqu’à maintenant, nous n’avons traité que des nombres positifs et rien n’indique dans un registre si un nombre est positif ou négatif.
+
+Les ingénieurs ont trouvé une solution pour distinguer les nombres négatifs.
+
+Les nombres compris entre 1 et 2 puissance 63 -1 sont considérés comme positifs et les nombres de 2 puissance 63 à 2 puissance 64 – 1 sont considérés comme négatifs. De plus leur valeur est calculée par complément à 2 puissance 64.
+
+Par exemple prenons le cas de -1 : dans ce système il est calculé comme le complément à 2 puissance 64 soit :
+
+18 446 744 073 709 551 616 - 1 = 18 446 744 073 709 551 615 ou en hexadécimal 0xFFFFFFFFFFFFFFFF 
+
+Ce nombre vous rappelle quelque chose ? Et oui c’est la valeur maximale d’un registre.
+
+Continuons la valeur – 10 sera indiquée par
+18 446 744 073 709 551 616 - 10 = 18 446 744 073 709 551 606 
+
+Et la plus grande valeur négative sera
+2 puissance 63 soit 9 223 372 036 854 775 808
+
+Et la plus grande valeur positive : 9 223 372 036 854 775 807
+
+Mais comment le processeur sait-il que le registre contient une valeur non signée entre 0 et 18 446 744 073 709 551 616  ou une valeur signée positive entre 0 et 9 223 372 036 854 775 807 ou une valeur négative entre -1 et - 9 223 372 036 854 775 808.
+
+Et bien, il ne le sait pas !! c’est vous qui en choisissant les instructions et les tests détermineront si la valeur doit être dans l’un ou l’autre cas.
+Il nous faut donc dupliquer la routine d’affichage en base 10, l’ancienne qui affichera les valeurs de 0 à 18 446 744 073 709 551 616 et une nouvelle qui affichera les valeurs avec le signe + ou le signe – suivant leur plage et c’est vous qui déciderez s’il faut appeler l’une ou l’autre routine.
+
+Heureusement, l’assembleur propose un indicateur du registre d’état N (pour Négatif) qui sera mis à 1 si le résultat d’une opération peut être considérée comme une valeur négative.
+
+Voyons déjà la nouvelle routine de conversion conversion10S (S pour signée).
+
+Il nous faut un caractère de plus dans la zone de conversion pour y insérer le signe + ou -.
+
+Le signe est initialisé à + dans le registre x3 puis nous testons la valeur du registre x0 et si elle est plus petite que zéro, nous mettons le signe - dans le registre x3 et nous inversons la valeur avec l’instruction neg x0,x0.
+
+Puis nous effectuons la conversion comme dans la routine de conversion non signée.
+
+A la fin, nous déplaçons les chiffres du résultat à partir de l’octet 1 de la zone de conversion et nous mettons le signe (registre x3) dans l’octet 0 de la zone.
+
+Dans le corps du programme soustraction64.s nous mettons les valeurs 10 et -10 pour tester cette nouvelle routine. Puis nous mettons la valeur maximum négative puis la valeur maximum positive. La routine donne bien les valeurs indiquées précédemment.
+
+Mais cette solution pose de nouveaux problèmes :
+
+Additionnons les nombres 9 223 372 036 854 775 800 et 20.
+
+En arithmétique non signée, nous trouvons un résultat correct 9223372036854775820 mais en signée nous trouvons  -9223372036854775796.
+
+Heureusement la aussi l’assembleur à prévu un indicateur dans le registre d’état il s’agit de l’indicateur v comme overflow. Il nous suffit de tester cet indicateur avec les instructions bvs (branch if overflow set) et bvc (branch if overflow clear) pour gérer les 2 cas.
+
+C’est la même chose pour la soustraction : le processeur positionne l’indicateur overflow si le résultat est inférieur à 9 223 372 036 854 775 808.
+
+Après une opération arithmétique dont on a demandé la mise à jour des indicateurs il est possible de savoir si un résultat est négatif ou positif en testant l’indicateur de signe s du registre d’état avec les instructions bmi (branch if negative) ou bpl (branch if positive ou zéro).
+
+Remarque en 64 bits il n’y a pas l’instruction rsb qui en 32 bits inversait l’opération.
+
+Voici le résultat de l’exécution :
+```
+Début programme.
+Soustraction :
+Affichage décimal : 688
+Soustraction fausse :
+Affichage décimal : 18446744073709551606
+Soustraction avec retenue :
+Retenue
+Affichage décimal : -10
+Affichage décimal : +10
+Affichage décimal : -9223372036854775808
+Affichage décimal : +9223372036854775807
+ Addition non signée :
+Affichage décimal : 9223372036854775820
+ Addition signée avec erreur :
+Affichage décimal : -9223372036854775796
+Retenue
+Fin normale du programme.
+```
