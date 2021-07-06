@@ -48,3 +48,31 @@ La somme des 2 est égale à : 147 573 952 589 676 412 942
 Le résultat du programme donne 14 pour la partie basse et 8 * (2 puissance 64) soit 147 573 952 589 676 412 928 pour la partie haute soit au total :
 
 147 573 952 589 676 412 942 ce qui correspond bien au calcul précédent.
+
+Résultat de l'exécution :
+```
+Début programme.
+Affichage  hexadécimal : 0000007FD13F3C90
+Affichage décimal :
+Affichage  hexadécimal : 0000000000000003
+100
+Affichage  hexadécimal : 0000007FD13F3C90
+affectation et affichage grand nombre !
+
+Affichage  hexadécimal : 0000000000000014
+18446744073709551615
+Affectation nombre octal :
+16
+Addition nombres :
+17618
+Addition valeur maxi :
+4
+Addition valeur maxi et test retenue:
+Retenue
+Addition sur 128 bits
+parties basses :
+14
+parties hautes :
+8
+Fin normale du programme.
+```
