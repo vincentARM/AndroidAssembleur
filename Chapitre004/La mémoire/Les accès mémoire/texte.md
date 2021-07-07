@@ -57,7 +57,7 @@ ldr x0,[x1]
 ```
 valeur que nous affichons en hexadécimal. Notez bien la différence entre les 2 instructions : la première charge dans un registre l’adresse, la deuxième avec le registre entre crochets charge la valeur contenue à cette adresse mémoire.
 
-Dans notre exemple, vous trouvez une valeur dans les 0x20000 pour l'adresse et la valeur 0x12345678 pour le contenu, ce qui est bien la valeur définie dans notre .data .
+Dans notre exemple, vous trouvez une valeur dans les 0x410000 pour l'adresse et la valeur 0x1234567890123456 pour le contenu, ce qui est bien la valeur définie dans notre .data .
 
 Il existe une autre façon de charger l’adresse d’une donnée c’est d’utiliser l’instruction
 ```asm
@@ -79,7 +79,7 @@ ldrb w0,[x1]
 ```
 En 64 bits, pour charger des données de longueur inférieure à 64 bits il faut utiliser le nom des registres 32 bits (w). Pour les données en 64 bits, il faut utiliser les noms en x.
 
-Mais c’est curieux c’est la valeur hexa 78 qui est affichée et pas la valeur 12 !! Ceci est normal car il y a 2 façons de stocker un entier dans la mémoire : les octets de poids fort en premier c’est le gros-boutiste ou big-endian
+Mais c’est curieux c’est la valeur hexa 56 qui est affichée et pas la valeur 12 !! Ceci est normal car il y a 2 façons de stocker un entier dans la mémoire : les octets de poids fort en premier c’est le gros-boutiste ou big-endian
 
 ou les octets de poids faible en premier : petit-boutiste ou little-endian
 
