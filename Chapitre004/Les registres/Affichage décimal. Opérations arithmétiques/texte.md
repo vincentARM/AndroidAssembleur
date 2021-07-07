@@ -161,3 +161,52 @@ Affichage décimal : -9223372036854775796
 Retenue
 Fin normale du programme.
 ```
+### Multiplications
+
+Dans le programme multiplication64.s, nous allons explorer les instructions de multiplication mais tout d’abord nous déplaçons les 2 routines conversion10 et conversion10S dans le fichier des routines que nous recompilons pour avoir un fichier objet complet.
+
+Dans le premier exemple nous effectuons une multiplication simple avec 2 facteurs positifs puis une multiplication avec 1 facteur négatif avec l’instruction mul x0,x1,x2.
+Vous remarquerez que la multiplication ne peut être faite qu’à partir de registres. Il n’est pas possible d’utiliser une valeur immédiate. 
+
+Curieusement aucun indicateur d’état ne peut être positionné lors des multiplications ce qui est gênant pour détecter les dépassements.
+
+Heureusement il existe les instructions umulh (multiplication non signée) et smulh (multiplication signée) qui permettent d’avoir la partie haute (cad les 64 -127 bits) du résultat et il nous suffit de tester si cette partie haute est différente de zéro pour détecter le dépassement. Bien sûr, il est possible de se servir de ces instructions pour avoir des résultats en 128 bits mais il faut dans ce cas, gérer les autres opérations et l’affichage en 128 bits.
+
+Reste à détecter les dépassements sur des multiplications signées lorsque le résultat d’une multiplication positive ( ou 2 opérateurs négatifs) tombe dans la tranche des valeurs négatives. 
+
+Dans ce cas, l’instruction smulh donne un résultat à 0 mais la multiplication est fausse.
+
+Je n’ai pas de solution à ce problème !!!
+
+Il doit y avoir une astuce mais je n’ai rien trouvé encore sur internet.
+
+Ensuite nous testons les instructions qui ajoute ou retranche le résultat de la multiplication de la valeur d’un 3ième registre. Ces instructions seront très utilisées lors des accès mémoire pour calculer l’adresse d’un poste d’ un tableau.
+
+Nous terminons avec l’instruction mneg qui inverse le signe du résultat de la multiplication . 
+
+Le reste des instructions non testées ici, concerne des multiplications de registres de 32 bits avec les noms de registre en w.
+
+Voici le résultat de l'exécution :
+```
+Début programme.
+multiplication :
+Affichage décimal : 177600
+multiplication signée :
+Affichage décimal : -500
+Erreur multiplication non signée :
+Affichage décimal : 0
+Affichage décimal : 25
+Erreur multiplication signée :
+Affichage décimal : -9223372036854775808
+Affichage décimal : +12
+Erreur multiplication signée :
+Affichage décimal : -4611686018427387904
+Affichage décimal : +0
+multiplication avec ajout :
+Affichage décimal : +5020
+multiplication avec soustraction :
+Affichage décimal : +4980
+multiplication avec inversion :
+Affichage décimal : -20
+Fin normale du programme.
+```
