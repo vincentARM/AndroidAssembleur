@@ -43,30 +43,30 @@ Nous avons vu qu’il est possible de définir des données comme des adresses d
 Un autre point important est que si vous définissez une chaîne de caractères ou un octet ou un demi mot, il faudra ajouter la pseudo instruction .align 4 pour que la routine suivante éventuelle ait bien ses instructions alignées sur 4 octets.
 
 Reprenons le programme accesmem64.s dans lequel nous avons des exemples de définitions des données. Puis dans la partie code, nous commençons par charger l’adresse de la donnée qValeur1 dans le registre x1 puis dans x0 pour l’afficher en hexadécimal avec l'instruction :
-
+```asm
 ldr x1,qAdriValeur1
 mov x0,x1
-
-. Cette adresse est définie à la fin du corps du programme avec l’instruction
-
+```
+Cette adresse est définie à la fin du corps du programme avec l’instruction :
+```asm
 qAdriValeur1:           .quad qValeur1
-
+```
 Puis nous chargeons la valeur contenue à cette adresse dans le registre x0 avec l’instruction
-
+```asm
 ldr x0,[x1]
-
+```
 valeur que nous affichons en hexadécimal. Notez bien la différence entre les 2 instructions : la première charge dans un registre l’adresse, la deuxième avec le registre entre crochets charge la valeur contenue à cette adresse mémoire.
 
 Dans notre exemple, vous trouvez une valeur dans les 0x20000 pour l'adresse et la valeur 0x12345678 pour le contenu, ce qui est bien la valeur définie dans notre .data .
 
 Il existe une autre façon de charger l’adresse d’une donnée c’est d’utiliser l’instruction
-
+```asm
 ldr x1,=qValeur1
-
+```
 Et cette fois ci, nul besoin de déclarer une instruction
-
+```asm
 qAdrqValeur1:           .quad iValeur1
-
+```
 pour que cela fonctionne. En effet c’est le compilateur qui va effectuer cette déclaration à la fin du programme : déclaration transparente pour vous.
 
 Mais attention, pour de gros programmes assembleur (plus de 1000 instruction de 4 octets), le compilateur générera une erreur bizarre car l’écart entre l’instruction ldr et la définition dépassera 4096 caractères.
@@ -74,9 +74,9 @@ Mais attention, pour de gros programmes assembleur (plus de 1000 instruction de 
 C’est pourquoi je conseille de prendre l’habitude de déclarer soit même les adresses (et de mettre comme préfixe qAdr).
 
 Ensuite nous trouvons un exemple pour charger le premier octet de l’entier qValeur1 avec l’instruction
-
+```asm
 ldrb w0,[x1]
-
+```
 En 64 bits, pour charger des données de longueur inférieure à 64 bits il faut utiliser le nom des registres 32 bits (w). Pour les données en 64 bits, il faut utiliser les noms en x.
 
 Mais c’est curieux c’est la valeur hexa 78 qui est affichée et pas la valeur 12 !! Ceci est normal car il y a 2 façons de stocker un entier dans la mémoire : les octets de poids fort en premier c’est le gros-boutiste ou big-endian
@@ -88,39 +88,39 @@ Voir sur wikipédia les précisions et les explications amusantes de ces termes.
 La manière de stocker les entiers peut être modifiée mais je vous déconseille de le faire !!!
 
 Maintenant nous chargeons le deuxième octet qui se trouve en position 1 (le premier étant en position 0) avec l’instruction :
-
+```asm
 ldr w0,[x1,#1]
-
+```
 x1 contenant l’adresse de notre entier et 1 est le déplacement (offset) à effectuer pour charger le 2ième octet.
 
 Suivant le type de processeur, le déplacement peut varier de -255 à + 255 ou -4095 à +4095 octets. Pour aller au delà, il faut utiliser un autre registre comme ceci :
-
+```asm
 ldr x0,[x1,x2]
-
+```
 Ensuite nous avons le chargement du 2ième demi mot de notre entier qui commence à l’octet 2 avec l’instruction
-
+```asm
 ldrh x0,[x1,#2]
-
+```
 Puis nous avons l’exemple du chargement du 5ième octet d’une chaîne de caractères en utilisant un registre comme déplacement.
 
 Puis nous montrons un exemple où après avoir chargé un octet, le registre de base est incrémenté de 1 pour charger l’octet suivant.
 
 Ensuite un autre exemple où cette fois, l ‘adresse est incrémentée de 1 avant d’effectuer le chargement dans le registre avec l’instruction :
-
+```asm
 ldrb w0,[x2,#1] !
-
+```
 Notez le ! à la fin de l’instruction.
 
 Puis encore un exemple où cette fois ci, l’adresse est incrémentée de la valeur d’un registre avec les instructions :
-
+```asm
 mov x3,#3
 ldrb w0,[x2],x3
+```
+Enfin nous effectuons un chargement multiple de 2 registres avec l’instruction
 
-Enfin nous effectuons un chargement multiple avec l’instruction
+ldp x0,x1,{x2}
 
-ldm x0,{x1-x3}
-
-dans ce cas, r0 contient l’adresse de la première valeur qui sera chargée dans le registre r1, puis la deuxième valeur (et comme ldm concerne les entiers, l’adresse sera celle de r0 + 4 ) dans r2 puis la 3ième valeur (donc à l’adresse r0+8) dans le registre r3.
+A REVOIR !!!
 
 Remarquez que la liste des registre est encadrée par des {} et il aurait été possible d’écrire
 
