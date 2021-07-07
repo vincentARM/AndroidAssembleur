@@ -34,5 +34,6 @@ découverte de l'assembleur ARM sur smarphone ou tablette Android. Discovery of 
     *  [Chapitre 4.1.1 : les opérations sur les bits](https://github.com/vincentARM/AndroidAssembleur/tree/main/Chapitre004/Les%20registres/Op%C3%A9rations%20sur%20les%20bits)
     *  [Chapitre 4.1.2 : affichage hexadécimal](https://github.com/vincentARM/AndroidAssembleur/tree/main/Chapitre004/Les%20registres/Affichage%20hexad%C3%A9cimal)
     *  [Chapitre 4.1.3 : modules et macros](https://github.com/vincentARM/AndroidAssembleur/tree/main/Chapitre004/Les%20registres/Modules%20et%20macros)
+    *  [Chapitre 4.1.4 : affichage décimal. Les opérations arithmétiques](https://github.com/vincentARM/AndroidAssembleur/tree/main/Chapitre004/Les%20registres/Affichage%20d%C3%A9cimal.%20Op%C3%A9rations%20arithm%C3%A9tiques)
 
  
