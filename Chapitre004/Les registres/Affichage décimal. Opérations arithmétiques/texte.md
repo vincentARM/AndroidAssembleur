@@ -210,3 +210,25 @@ multiplication avec inversion :
 Affichage décimal : -20
 Fin normale du programme.
 ```
+
+### Divisions.
+
+Il n’y a que 2 instructions pour la division udiv pour la division non signée et sdiv pour la division signée.
+
+De plus aucun indicateur d’état n’est positionné lors de ces divisions.
+
+Dans le programme division64.s, nous nous contentons de tester ces 2 instructions et de calculer le reste avec l’instruction msub.
+
+Remarque : rien n’indique une erreur si c’est une division par zéro. Il faut donc tester ce cas pour afficher un message d’erreur si cela peut arriver.
+```
+Début programme.
+Division non signée :
+Affichage décimal : 4
+Affichage décimal : 88
+division signée :
+Affichage décimal : -20
+Affichage décimal : -5
+division par 0 :
+Affichage décimal : +0
+Fin normale du programme.
+```
