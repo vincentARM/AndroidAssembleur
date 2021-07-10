@@ -39,7 +39,9 @@ szMessFinPgm:        .asciz "Fin normale du programme. \n"
 szRetourLigne:       .asciz "\n"
 
 bOctet1:              .byte 5            // définit un octet de valeur 5
+.align 2
 hDemiMot1:            .hword 0x1234      // définit un demi mot (2 octets)
+.align 4
 iEntier1:             .int  0x12345678   // définit un entier de 4 octets
 
 .align 8
