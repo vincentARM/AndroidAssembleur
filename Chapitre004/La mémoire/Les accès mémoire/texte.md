@@ -120,6 +120,12 @@ Enfin nous effectuons un chargement multiple de 2 registres avec l’instruction
 ```asm
 ldp x0,x1,{x2}
 ```
+Il existe aussi une instruction ldr particulière lorsque nous voulons charger une valeur négative de 4 octets dans un registre.
+Il est necessaire de compléter cette valeur pour qu'elle repprésente bien une valeur négative dans un registre 64 bits. Dans ce cas nous utilisons l'instruction suivante :
+```asm
+    ldr x1,qAdrqValeurNeg
+    ldrsw x0,[x1]
+ ```
 
 Enfin le programme se termine par un exemple du stockage d’un double mot en mémoire avec l’instruction
 ```asm
