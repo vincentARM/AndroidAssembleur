@@ -142,3 +142,43 @@ mov x2,#x3
 mov x0,#’A’       @ caractère A
 strb w0,[x1xr2]
 ```
+Résultat de l"exécution :
+```
+Début programme.
+Accès valeur 8 octets :
+Affichage  hexadécimal : 0000000000410A00
+Affichage  hexadécimal : 1234567890123456
+accès valeur 1 octet :
+Affichage  hexadécimal : 0000000000000056
+accès valeur 2 octets :
+Affichage  hexadécimal : 0000000000005678
+accès valeur 4 octets :
+Affichage  hexadécimal : 0000000090123456
+accès valeur 2 registres :
+Affichage  hexadécimal : 0000000000000001
+Affichage  hexadécimal : 0000000000000002
+accès valeur negative :
+Affichage  hexadécimal : 00000000FFFFFFFF
+accès valeur negative avec report du signe:
+Affichage  hexadécimal : FFFFFFFFFFFFFFFF
+accès valeur avec offset dans registre:
+Affichage  hexadécimal : 0000000000000003
+accès valeur avec offset immediat et maj:
+Affichage  hexadécimal : 0000000000410A0C
+Affichage  hexadécimal : 0000000000000003
+Affichage  hexadécimal : 0000000000000005
+Affichage  hexadécimal : 0000000000410A2C
+accès valeur avec offset post et maj:
+Affichage  hexadécimal : 0000000000410A0C
+Affichage  hexadécimal : 0000000000000001
+Affichage  hexadécimal : 0000000000000003
+Affichage  hexadécimal : 0000000000410A2C
+stockage et destokage sur la pile:
+Affichage  hexadécimal : 0000000000000004
+Affichage  hexadécimal : 000000000000000A
+Stockage 8 octets en mémoire :
+Affichage  hexadécimal : 0000000000006666
+Stockage 1 octet en mémoire :
+Affichage  hexadécimal : 0000000012006666
+Fin normale du programme.
+```
