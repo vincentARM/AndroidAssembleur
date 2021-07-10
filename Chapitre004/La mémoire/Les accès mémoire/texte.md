@@ -117,23 +117,22 @@ mov x3,#3
 ldrb w0,[x2],x3
 ```
 Enfin nous effectuons un chargement multiple de 2 registres avec l’instruction
-
+```asm
 ldp x0,x1,{x2}
-
-
-
+```
 
 Enfin le programme se termine par un exemple du stockage d’un double mot en mémoire avec l’instruction
-
+```asm
 str x0 ,[x1]
-
+```
 Remarque : c’est bien le contenu de x0 qui est stocké à l’adresse contenue dans x1.
 
 Tout ce que l’on a vu pour l’instruction ldr est applicable à l’instruction str.
 
 Par exemple pour stocker un octet à la position 4 d’une chaîne, nous utiliserons ceci :
-
+```asm
 ldr x1,qAdrszChaine
 mov x2,#x3
 mov x0,#’A’       @ caractère A
 strb w0,[x1xr2]
+```
