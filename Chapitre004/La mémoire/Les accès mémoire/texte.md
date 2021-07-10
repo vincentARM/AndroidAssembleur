@@ -120,31 +120,20 @@ Enfin nous effectuons un chargement multiple de 2 registres avec l’instruction
 
 ldp x0,x1,{x2}
 
-A REVOIR !!!
 
-Remarquez que la liste des registre est encadrée par des {} et il aurait été possible d’écrire
 
-ldm r0,{r1,r2,r3}
 
-puis nous effectuons le chargement d’une valeur de 8 octets dans 2 registres avec l’instruction
+Enfin le programme se termine par un exemple du stockage d’un double mot en mémoire avec l’instruction
 
-ldrd r2,r3,[r1]
+str x0 ,[x1]
 
-Le premier registre doit être un registre pair et le second soit être le successeur du premier !!
+Remarque : c’est bien le contenu de x0 qui est stocké à l’adresse contenue dans x1.
 
-r1 contenant l’adresse du début de la zone de 8 octets. R2 contiendra les 4 octets finaux et r3 les 4 octets du début.
-
-Enfin le programme se termine par un exemple du stockage d’un entier en mémoire avec l’instruction
-
-str r1 ,[r2]
-
-Remarque : c’est bien le contenu de r1 qui est stocké à l’adresse contenue dans r2.
-
-Tout ce que l’on a vu pour l’instruction ldr (ou ldm) est applicable à l’instruction str (ou stm).
+Tout ce que l’on a vu pour l’instruction ldr est applicable à l’instruction str.
 
 Par exemple pour stocker un octet à la position 4 d’une chaîne, nous utiliserons ceci :
 
-ldr r1,iAdrszChaine
-mov r2,#r3
-mov r0,#’A’       @ caractère A
-strb r0,[r1,r2]
+ldr x1,qAdrszChaine
+mov x2,#x3
+mov x0,#’A’       @ caractère A
+strb w0,[x1xr2]
