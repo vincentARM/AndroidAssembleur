@@ -37,5 +37,6 @@ découverte de l'assembleur ARM sur smarphone ou tablette Android. Discovery of 
     *  [Chapitre 4.1.4 : affichage décimal. Les opérations arithmétiques](https://github.com/vincentARM/AndroidAssembleur/tree/main/Chapitre004/Les%20registres/Affichage%20d%C3%A9cimal.%20Op%C3%A9rations%20arithm%C3%A9tiques)
   * [Chapitre 4.2 : la mémoire](https://github.com/vincentARM/AndroidAssembleur/tree/main/Chapitre004/La%20m%C3%A9moire)
     * [Chapitre 4.2.1 : les accès mémoire](https://github.com/vincentARM/AndroidAssembleur/tree/main/Chapitre004/La%20m%C3%A9moire/Les%20acc%C3%A8s%20m%C3%A9moire)
+    * [Chapitre 4.2.2 : affichage des zones mémoire](https://github.com/vincentARM/AndroidAssembleur/tree/main/Chapitre004/La%20m%C3%A9moire/Affichage%20des%20zones%20m%C3%A9moire)
 
  
