@@ -2,7 +2,7 @@
 
 Nous avons vu depuis le premier programme, des messages sous la forme de chaînes de caractères.
 
-Et en fait une chaîne de caractères n’est qu’un tableau d’octets (donc chaque poste a une longueur de 1) terminée ou non par un zéro binaire.
+Et en fait une chaîne de caractères n’est qu’un tableau d’octets (donc chaque poste a une longueur de 1) terminé ou non par un zéro binaire.
 
 Dans le premier programme, dans la routine d’affichage, vous avez un exemple de routine de balayage d’un tableau pour calculer la longueur.
 
@@ -10,13 +10,13 @@ Dans la routine d’affichage des zones mémoire, vous avez un exemple de copie 
 
 Donc il ne reste plus qu’à écrire toutes les autres routines concernant les chaînes de caractères :  recherche d’un caractère, recherche d’une sous chaîne, concaténation, insertion d’un caractère insertion d’une sous chaîne, conversion minuscule, majuscule etc etc.
 
-Dans le programme exchaine32.s, nous allons seulement voir la comparaison de 2 chaînes et l’insertion d’une sous chaîne en l’emplacement d’un caractère d’insertion.
+Dans le programme exchaine32.s, nous allons seulement voir la comparaison de 2 chaînes et l’insertion d’une sous chaîne à l’emplacement d’un caractère d’insertion.
 
 Cette dernière routine sera utilisée pour insérer dans un message le résultat des conversions ce qui simplifiera l’affichage.
 
 Commençons par la routine de comparaison :
 
-Les adresses des 2 chaînes à comparer sint transmises à la routine dans les registres r0 et r1. Nous commençons par initialiser à zéro le registre r2 qui servira d’indice pour accéder à chaque octet des 2 chaines.
+Les adresses des 2 chaînes à comparer sont transmises à la routine dans les registres r0 et r1. Nous commençons par initialiser à zéro le registre r2 qui servira d’indice pour accéder à chaque octet des 2 chaines.
 
 Puis nous chargeons dans les registres r3 et r4 l’octet de même indice de chaque chaîne et nous les comparons.
 
