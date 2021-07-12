@@ -51,6 +51,8 @@ Cette adresse est définie à la fin du corps du programme avec l’instruction 
 ```asm
 qAdriValeur1:           .quad qValeur1
 ```
+Vous remarquerez que l'adresse est définie avec .quad cad sur 8 octets ou 64 bits.
+
 Puis nous chargeons la valeur contenue à cette adresse dans le registre x0 avec l’instruction
 ```asm
 ldr x0,[x1]
