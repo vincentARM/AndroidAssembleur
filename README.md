@@ -41,5 +41,6 @@ découverte de l'assembleur ARM sur smarphone ou tablette Android. Discovery of 
     * [Chapitre 4.2.3 : les tableaux](https://github.com/vincentARM/AndroidAssembleur/tree/main/Chapitre004/La%20m%C3%A9moire/Les%20tableaux)
     * [Chapitre 4.2.4 : les chaînes de caractères](https://github.com/vincentARM/AndroidAssembleur/tree/main/Chapitre004/La%20m%C3%A9moire/Chaines%20de%20caract%C3%A8res)
     * [Chapitre 4.2.5 : les structures](https://github.com/vincentARM/AndroidAssembleur/tree/main/Chapitre004/La%20m%C3%A9moire/Les%20structures)
+    * [Chapitre 4.2.6 : la pile](https://github.com/vincentARM/AndroidAssembleur/tree/main/Chapitre004/La%20m%C3%A9moire/La%20pile)
 
  
