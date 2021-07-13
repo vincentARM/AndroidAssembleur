@@ -23,7 +23,11 @@ Si l’un est plus petit ou plus grand nous positionnons dans x0 les valeurs -1 
 
 S ‘ils sont égaux, nous testons si l’un est égal à zéro et si oui nous mettons 0 dans le registre x0 et allons à la fin de la routine sinon nous incrémentons l’indice et nous bouclons. 
 
-Remarquez l’utilisation de l’instruction cbz w3,2f qui remplace les 2 instructions classiques :
+Remarquez l’utilisation de l’instruction
+```asm
+cbz w3,2f 
+```
+qui remplace les 2 instructions classiques :
 ```asm
 cmp w3,#0
 beq 2f
@@ -36,7 +40,12 @@ La routine insererChaineCar est un peu plus compliquée. En plus des 2 adresses 
 
 Dans la routine, nous commençons à calculer la longueur de chaque chaîne puis leur somme et à comparer à la longueur du buffer.
 
-Remarquez ici aussi, l’utilisation de l’instruction cinc x6,x6,ne qui incrémente de 1 le registre x6 si le test précédent est différent de zéro (ne).
+Remarquez ici aussi, l’utilisation de l’instruction 
+```asm
+cmp w4,0
+cinc x6,x6,ne
+```
+qui incrémente de 1 le registre x6 si le test précédent est différent de zéro (ne).
 
 Si une des chaîne est nulle ou si leur somme est supérieure à la taille, nous terminons la routine avec une erreur (code négatif renvoyé dans le registre x0).
 
