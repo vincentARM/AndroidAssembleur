@@ -42,7 +42,7 @@ stp x0,x19,[sp,-16]!
 ```
 Dans la routine, nous commençons par sauvegarder 4 registres qui seront utilisés. Puis nous mettons dans le registre fp, la somme de l’adresse de la pile contenue dans le registre sp et 8 * 4 octets.
 
-Le registre fp (frame pointer) est en fait le registre r11 qui est utilisé habituellement pour stocker l’adresse de la pile en un instant donné.
+Le registre fp (frame pointer) est en fait le registre x29 qui est utilisé habituellement pour stocker l’adresse de la pile en un instant donné. En effet le pointeur de pile sp peut évoluer dans le reste de la routine.
 
 Ici comme nous venons de mettre sur la pile 4 registres, nous positionnons dans fp l’adresse de la pile avant ces 4 insertions.
 
@@ -60,9 +60,13 @@ Puis nous allons voir la possibilité d’utiliser la pile comme stockage de val
 Dans cette routine ,nous allons extraire les 5 premiers postes du tableau et les stocker sur la pile. Cette fois ci, nous passons l’adresse du tableau dans le registre x0.
 
 Dans la routine, nous sauvegardons les registres puis nous reservons sur la pile le nombre d’octets nécessaires au stockage de 5 postes par l’instruction sub sp,#8 * 6 et nous conservons cette nouvelle adresse dans le registre fp.
+
 Attention, bien que nous n’avons besoin de place que pour 5 postes, nous reservons 6 fois 8 octets car la pile doit toujours être alignée sur une frontière de 16 octets. Si vous l’oubliez, vous aurez l’erreur bus error.
+
 Puis nous trouvons une boucle qui charge 5 entiers du tableau d’origine et les charge dans la zone réservée de la pile.
+
 Nous effectuons un affichage de la mémoire à partir de l’adresse contenue dans fp pour vérification. Vous voyez bien les entiers 1 à 5 qui occupent chacun 8 octets. Nous pouvons nous demander à quoi correspondent les autres valeurs. Il faut se rappeler que ce sont toutes les valeurs qui ont été stockées sur la pile préalablement à la réservation de la place de 48 octets. Donc on y trouve le contenu des registres x1, lr, x2,fp  puis il faudrait remonter dans les appels précédents pour identifier l’usage de la pile.
+
 Voici l’exécution complète du programme :
 ```
 Début programme.
