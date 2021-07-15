@@ -218,3 +218,23 @@ ABCDEFGHIJ
 ```
 
 Nous trouvons bien les 10 premiers caractères du fichier lu.
+
+Ce programme pose un petit problème : nous devons définir un buffer de lecture avec une taille suffisante pour contenir toutes les données du fichier. Mais hélas nous ne connaissons pas à l’avance quelle doit être la taille maximum.
+
+Pour cela dans le programme fichierStat64.s nous allons exploiter l’appel système STATS (code 80) qui retourne une structure de données contenant des informations sur le fichier dont la taille.
+
+La description de la fonction est de la structure se trouve facilement sur internet par exemple sur ce site :
+
+https://man7.org/linux/man-pages/man2/stat.2.html
+
+Bien sûr, il nous faut créer la structure en assembleur comme vue dans un chapitre précédent en indiquant la taille de chaque donnée. Un affichage du résultat nous donne des indications sur la taille des données.
+
+A partir du programme précédent fichier64.s nous ajoutons un nouvel appel système en passant le FD du fichier demandé et une adresse d’un buffer pour stocker la structure.
+
+Nous affichons le résultat et extrayons la donnée taille que nous affichons . Nous trouvons 0x27 soit 39 en décimal ce qui correspond bien ç la taille du fichier donnée par ls -l test1.txt
+
+Avec cette taille, nous allons réserver une place sur le tas suivant la méthode vue dans le chapitre sur le tas.
+
+Puis nous allons continuer comment dans le programme fichier64.s pour lire les données et écrire les 10 premiers caractères du fichier.
+
+Et là, nous n’avons plus à nous préoccuper de la taille de n’importe quel fichier pouvant être lu.
