@@ -5,7 +5,7 @@ Il est possible de stocker des données de manière dynamique mais aucun mécani
 
 Attention : le tas n’est sans doute pas initialisé par le système  !!
 
-Dans le programme tas64.s, nous allons utiliser le tas pour stocker quelques données. Nous utilisons l’étiquette __end__ calculée par le linker et qui donne l’adresse de fin de toutes les données du programme (voir la liste de sortie du linker). Cette adresse nous sert à initialisée le pointeur de début du tas ptZoneTas.
+Dans le programme tas64.s, nous allons utiliser le tas pour stocker quelques données. Nous utilisons l’étiquette "__end__" calculée par le linker et qui donne l’adresse de fin de toutes les données du programme (voir la liste de sortie du linker). Cette adresse nous sert à initialisée le pointeur de début du tas ptZoneTas.
 
 Nous créons une fonction reserverPlace qui prend comme paramètre dans le registre x0, la taille en octet de la place à réserver. Nous chargeons l’adresse du pointeur de début du tas libre puis le pointeur lui même et nous lui ajoutons la taille. 
 
