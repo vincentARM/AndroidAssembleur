@@ -81,26 +81,27 @@ qAdrszMessDebutPgm:    .quad szMessDebutPgm
 qAdrszMessFinPgm:      .quad szMessFinPgm
 qAdrszRetourLigne:     .quad szRetourLigne
 /***************************************************/
-/*   execution routine              */
+/*   reserver Place              */
 /***************************************************/
 /* x0 contient la taille à réserver */
 reserverPlace:                  // INFO: reserverPlace
     stp x1,lr,[sp,-16]!         // save  registres
     stp x2,fp,[sp,-16]!         // save  registres
-    ldr x1,qAdrptZoneTas
-    ldr x2,[x1]
-    add x0,x0,x2
+    ldr x1,qAdrptZoneTas        // adresse du pointeur de début du tas
+    ldr x2,[x1]                 // pointeur debut du tas
+    add x0,x0,x2                // ajout de la taille
     lsr x0,x0,3
-    lsl x0,x0,3
-    add x0,x0,8
-    str x0,[x1]
-    mov x0,x2
+    lsl x0,x0,3                 // alignement sur une frontière de 8 octets
+    add x0,x0,8                 // ajout de 8 pour calculer la nouvelle adresse de début du tas
+    str x0,[x1]                 // et avec maj du pointeur
     ldr x1,ptFinTas             // vérification fin du tas
     cmp x0,x1
-    blt 100f
+    blt 1f
     afficherLib "\033[31mErreur : tas trop petit !!\033[0m"
     mov x0,-1
- 
+    b 100f
+1:
+    mov x0,x2                   // retourne l'adresse de début de la zone réservée.
 100:
     ldp x2,fp,[sp],16           // restaur  registres
     ldp x1,lr,[sp],16           // restaur registres
