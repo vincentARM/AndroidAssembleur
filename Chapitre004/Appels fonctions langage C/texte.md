@@ -6,7 +6,7 @@ Pour cela dans le programme appelFonctC64.s nous allons nous contenter d’appel
 La fonction utilise dans l’ordre une chaîne de formatage et des valeurs qui seront affichées en fonction de leur type (identificateur %c %d %s etc.)
 
 Dans le programme , nous préparons une chaîne de formatage identique à celle du langage C et nous passons son adresse à la fonction dans le registre x0 puis nous passons la valeur à afficher dans le registre x1.
-Et pour avoir accès aux librairies du C, nous devons modifier notre script de compilation pour remplacer l’éditeur de lien ld par l’éditeur de lien intégré au compilateur C 
+Et pour avoir accès aux librairies du C, nous devons modifier notre script de compilation pour remplacer l’éditeur de lien ld par l’éditeur de lien intégré au compilateur C. 
 Je voulais utiliser gcc mais curieusement il n’est pas présent sur mon smartphone. Mais je vois qu’il peut être remplacé par le compilateur clang en installant le package avec la commande ;
 ```shell
  pkg install clang
@@ -34,7 +34,7 @@ CANNOT LINK EXECUTABLE "appelFonctC64": "/data/data/com.termux/files/home/asm64/
 ```
 Une recherche sur Internet explique que le système Android lors d’appel de fonctions dynamiques n’accepte pas les définitions des données comme nous l’avons fait jusqu’à maintenant mais exige que les adresses puissent être relogeables, c’est à dire que les données puissent être stockées à des adresses autres que celle définies par le linker.
 
-Toujours grâce à internet, j’ai pu trouvé comment procéder dans le cas de l’assembleur ARM. Il faut d’abord déclarer un déplacement entre la donnée et cette déclaration avec l’instruction
+Toujours grâce à internet, j’ai pu trouvé comment procéder dans le cas de l’assembleur ARM. Il faut d’abord déclarer un déplacement entre la donnée et cette déclaration avec l’instruction :
 ```asm
 qOfszMessDebPgm:       .quad szMessDebutPgm - .
 ```
@@ -51,7 +51,7 @@ C’est un peu compliqué mais cela fonctionne, la fonction printf  affiche bien
 
 Il faut donc aussi modifier toutes nos routines précédentes pour éviter cette anomalie !!
 
-Nous continuons en affichant 5 valeurs passées dans les registres x1 à x9 avec le formatage « valeur=%d %d %d %d%d%d%d%d%d« 
+Nous continuons en affichant 5 valeurs passées dans les registres x1 à x9 avec le formatage "valeur=%d %d %d %d %d %d %d %d %d".
 
 Le résultat est bon pour les 7 premières valeurs mais erroné pour la 8 ième et la 9ième ! Pourquoi ?
 
