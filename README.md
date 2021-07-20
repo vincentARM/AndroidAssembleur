@@ -44,6 +44,7 @@ découverte de l'assembleur ARM sur smarphone ou tablette Android. Discovery of 
     * [Chapitre 4.2.6 : la pile](https://github.com/vincentARM/AndroidAssembleur/tree/main/Chapitre004/La%20m%C3%A9moire/La%20pile)
     * [Chapitre 4.2.7 : le tas](https://github.com/vincentARM/AndroidAssembleur/tree/main/Chapitre004/La%20m%C3%A9moire/Le%20tas)
   * [Chapitre 4.3 : les appels au système d'exploitation](https://github.com/vincentARM/AndroidAssembleur/tree/main/Chapitre004/Appels%20Syst%C3%A8me)
-  * [Chapitre 4.4 : appels de lonctions langage C](https://github.com/vincentARM/AndroidAssembleur/tree/main/Chapitre004/Appels%20fonctions%20langage%20C)
+  * [Chapitre 4.4 : appels de fonctions langage C](https://github.com/vincentARM/AndroidAssembleur/tree/main/Chapitre004/Appels%20fonctions%20langage%20C)
+  * [Chapitre 4.5 : flux d'instructions](https://github.com/vincentARM/AndroidAssembleur/tree/main/Chapitre004/Flux%20instructions)
 
  
