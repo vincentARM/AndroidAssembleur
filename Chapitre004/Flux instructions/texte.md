@@ -47,13 +47,38 @@ Le registre x0 est incrementé de 1 si le comparaison précédente rend un résu
 
 Remarque : il existe d’autres instructions conditionnelles qui peuvent être utilisées à la place de saut pour les cas simples (voir la table des instructions arm 64).
 
-En fin nous terminons par un exemple d’appel de routine : la première avec l’instruction bl nom de routine, la deuxiéme en mettant d’abord l’adresse de la routine dans le registre x5 puis en utilisant l’instruction blr x5.
+En fin nous terminons par un exemple d’appel de routine : la première avec l’instruction bl nom de routine, la deuxiéme en mettant d’abord l’adresse de la routine dans le registre x5 puis en utilisant l’instruction 
+```asm
+blr x5
+```
 L’adresse de la routine utilise l’instruction adr à la place de ldr puisque nous voulons dans ce cas l’adresse de l’étiquette et pas sa valeur (qui serait le code de la première instruction de la routine).
 
+
 Je rappelle que ces instructions passent le contrôle de l’exécution à la routine et stocke l’adresse de retour dans le registre bl (x30). Si la routine appelle d’autres routines, il est nécessaire de sauvegarder le registre lr.
+
 Le retour au programme appelant s’effectue avec l’instruction ret après avoir éventuellement restauré le registre lr et les autres registres.
+
 La sauvegarde et la restauration des autres registres dépend entièrement de vos choix de programmation sauf si vous avez l’intention d’écrire des routines pour publier une bibliothèque particulière. Dans ce cas, il vous faudra respecter la convention d’appel standard.
 
 Vous remarquerez que rien ne distingue une étiquette de nom de routine d’une quelconque autre étiquette. Ceci implique que seule l’instruction ret terminera proprement l’exécution de la routine.
 
 Si vous l’oubliez, l’exécution continuera avec la routine suivante et les résultats seront imprévus ou trouvera du vide et vous aurez l’erreur segmentation fault.
+
+Voic un exemple d'exécution :
+```
+Début programme.
+exemple SI ALORS SINON
+Inférieur.
+Alternative cas simple
+resultat =
+Affichage  hexadécimal : 0000000000000008
+resultat1 =
+Affichage  hexadécimal : 0000000000000001
+Exemple de boucle :
+Caractère trouvé en position 7
+autre boucle :
+Longueur = 18
+Je suis la routine
+Je suis la routine
+Fin normale du programme.
+```
