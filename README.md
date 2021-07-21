@@ -47,5 +47,6 @@ découverte de l'assembleur ARM sur smarphone ou tablette Android. Discovery of 
   * [Chapitre 4.3 : les appels au système d'exploitation](https://github.com/vincentARM/AndroidAssembleur/tree/main/Chapitre004/Appels%20Syst%C3%A8me)
   * [Chapitre 4.4 : appels de fonctions langage C](https://github.com/vincentARM/AndroidAssembleur/tree/main/Chapitre004/Appels%20fonctions%20langage%20C)
   * [Chapitre 4.5 : flux d'instructions](https://github.com/vincentARM/AndroidAssembleur/tree/main/Chapitre004/Flux%20instructions)
+  * [Chapitre 4.6 : nombres à virgule flottante](https://github.com/vincentARM/AndroidAssembleur/tree/main/Chapitre004/Nombres%20%C3%A0%20virgule%20flottante)
 
  
