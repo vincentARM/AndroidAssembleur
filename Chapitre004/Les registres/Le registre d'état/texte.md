@@ -11,16 +11,21 @@ Parmi ces indicateurs (voir la documentation arm en fonction de votre processeur
    
    * l’indicateur d’overflow (V)
    * 
-Ces indicateurs ne sont mis à jour que si l’on ajoute le suffixe s aux opérations binaires et certaines opérations arithmétiques. Ils sont toujours mis à jour par les instructions tst,teq et cmp.
+Ces indicateurs ne sont mis à jour que si l’on ajoute le suffixe s à certaines opérations binaires(and, bic) et certaines opérations arithmétiques (add, adc, sub, sbc,neg). Ils sont toujours mis à jour par les instructions tst et cmp.
 
 Attention c’est une erreur fréquente d’oublier le s à l’instruction dont nous voulons avoir l’état.
 
 Pour voir ces mises à jour, dans le programme affRegEtat64.s, nous écrivons une routine qui affiche l’état (0 ou 1) de ces indicateurs.
 
-Dans cette routine, nous commençons par sauvegarder le registre d’état dans le registre x’ grâce à l’instruction spéciale mrs x4,nzcv.
+Dans cette routine, nous commençons par sauvegarder le registre d’état dans le registre x4 grâce à l’instruction spéciale
+```asm
+mrs x4,nzcv
+```
 
-Puis nous effectuons des branchements conditionnels pour mettre en place la valeur 0 ou 1 en fonction de l’état de chaque indicateur. Puis nous affichons le message ainsi composé et nous terminons en restaurant le registre d’état avec une autre instruction spéciale msr nzcv,x4
-
+Puis nous effectuons des branchements conditionnels pour mettre en place la valeur 0 ou 1 en fonction de l’état de chaque indicateur. Puis nous affichons le message ainsi composé et nous terminons en restaurant le registre d’état avec une autre instruction spéciale
+```asm
+msr nzcv,x4
+```
 Pour utiliser cette routine, nous commençons dans le corps du programme par mettre la valeur 0 dans le registre x0 avec ands x0,x0,xzr puis la valeur 0 ce qui permet de vérifier le positionnement des indicateurs.
 
 Nous voyons que le seul indicateur Z est positionné.
