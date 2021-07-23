@@ -68,13 +68,11 @@ Ces informations nous serviront dans d’autres programmes.
 Puis nous passons à l’étape de création de notre propre fenêtre  avec la fonction XcreateSimpleWindow qui nécessite 8 paramètres :
 
 * L’adresse du Display contenue dans x28
-* 
 * La position X de la fenêtre sur l’écran
-* 
 * La position Y de la fenêtre sur l’écran
-* Sa largeur
-* Sa hauteur
-* L’épaisseur de la bordure
+* la largeur
+* la hauteur
+* l’épaisseur de la bordure
 * ?
 * et la couleur du fond 
 
@@ -92,9 +90,9 @@ Ensuite nous affichons la fenêtre avec la fonction XmapWindow et nous autorison
 
 Le paramètre 5 est en fait la valeur binaire 0b101 soit les valeurs  keyPressedMask et buttonPressedMask qui autorisent la prise en compte des événements appui sur une touche et click de la souris.
 
-Puis nous trouvons une boucle d’écoute des évènements qui touche la fenêtre avec la fonction XnextEvent. Pour les 2 événements autorisés plus haut, nous affichons simplement le libellé « Evenement ».
+Puis nous trouvons une boucle d’écoute des évènements qui touchent la fenêtre avec la fonction XnextEvent. Pour les 2 événements autorisés plus haut, nous affichons simplement le libellé « Evenement ».
 
-Si vous avez respecté toutes les consignes précédente, la compilation doit être ok et l’exécution aussi. Vous devez voir apparaître une fenêtre plus claire dans l’écran de l’application Xserver et si vous taper du doigt dans cette fenêtre vous devez voir le libellé apparaître dans la console.
+Si vous avez respecté toutes les consignes précédentes, la compilation doit être ok et l’exécution aussi. Vous devez voir apparaître une fenêtre plus claire dans l’écran de l’application Xserver et si vous taper du doigt dans cette fenêtre vous devez voir le libellé apparaître dans la console.
 
 Remarque : la barre système n’apparaît pas en haut de la fenêtre comme sur un Raspberry Pi. Je n’ai pas encore découvert pourquoi !! Donc il n’est pas possible de fermer la fenêtre, il faut donc faire un ctrl-C dans la console pour arrêter le programme.
  
