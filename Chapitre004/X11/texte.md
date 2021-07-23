@@ -65,15 +65,16 @@ Au déplacement 232 de cette structure, nous trouvons l’adresse d’une autre 
 
 Ces informations nous serviront dans d’autres programmes.
 
-Puis nous passons à l’étape de création de notre propre fenêtre  avec la fonction XcreateSimpleWindow qui nécessite 8 paramètres :
+Puis nous passons à l’étape de création de notre propre fenêtre  avec la fonction XcreateSimpleWindow qui nécessite 9 paramètres :
 
 * L’adresse du Display contenue dans x28
+* l'adresse de la fenêtre parent récupérée dans x1 
 * La position X de la fenêtre sur l’écran
 * La position Y de la fenêtre sur l’écran
 * la largeur
 * la hauteur
 * l’épaisseur de la bordure
-* ?
+* la couleur de la bordure
 * et la couleur du fond 
 
 Ce dernier paramètre doit être passé par la pile pour respecter les conventions d’appel.
