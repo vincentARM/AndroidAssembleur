@@ -99,3 +99,6 @@ Remarque : la barre système n’apparaît pas en haut de la fenêtre comme sur
  
 
 Remarque : le linker n’utilise pas le fichier objet des routines précédentes  car il faut récrire les routines avec une gestion des adresses relogeables.
+
+Image de l'écran xServer
+https://github.com/vincentARM/AndroidAssembleur/blob/main/Chapitre004/X11/Screenshot_X%20Server1.jpg
