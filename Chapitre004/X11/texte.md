@@ -103,3 +103,39 @@ Remarque : le linker n’utilise pas le fichier objet des routines précédente
 Image de l'écran xServer :
 
 ![xServer](https://github.com/vincentARM/AndroidAssembleur/blob/main/Chapitre004/X11/Screenshot_X%20Server1.jpg)
+
+Le programme suivant pgm2X1164.s va afficher dans une fenêtre un pixel, une ligne, un rectangle, du texte et un bouton. L’appui sur ce bouton fera apparaître un texte dans la fenêtre.
+
+Pour faire tout cela, nous rajoutons les constantes X11 nécessaires ainsi qu’un fichier contenant les structures (defStruct64.inc). Attention, jr ne vous garantit pas l’exactitude de toutes ces définitions car je les ai recréées à partir des descriptions pour le langage C.
+
+J’ai récrit les routines du fichier routines64 pour qu’elles fonctionnent correctement avec les librairies dynamiques. J’ai appelé le fichier routines64Relo.s.
+
+
+Après les habituelles descriptions des messages dans la .data et la réservation de places pour nos variables et structures, nous reprenons l’ouverture de la connexion au serveur x11 et la création de la fenêtre du programme précédent. 
+
+Pour nous permettre des affichages différents, nous créons deux contextes graphiques dans la routine création GC. Un simple et un avec une police de caractère différente et de couleur différente.
+Le chargement de la police ne semble pas exact. Je n’ai pas encore trouvé dans Termux comment avoir la liste des polices valides. Pour l’instant, la taille est trop petite pour être bien lisible.
+
+
+Le dessin de pixel, ligne, rectangle et ne pose pas de difficulté car il suffit de respecter les paramètres à passer aux fonctions X11 de dessin.
+
+L’écriture de texte fait appel à un calcul de la longueur préalable à l’aide de l’instruction 
+```asm
+ .equ LGTEXTEAFF, . -  szTexteAff
+ ```
+Vous remarquerez qu’il ne faut pas passer le 0 final à la fonction X11.
+
+La création du bouton est un peu plus complexe. En effet, tout bouton est considéré comme une fenêtre et la création doit donc s’effectuer de la même façon : création, affichage, création d’un contexte graphique associé, autorisation des saisies écriture du titre du bouton.
+
+Il nous faut aussi ajouter une action à exécuter lors de l ‘appui sur le bouton. Pour faciliter la gestion du bouton, toutes les informations le concernant sont stockées dans une structure.
+
+Vous remarquerez que nous utilisons les registres x19,x20 x21 pour stocker les données principales car les fonctions X11 appelées respectent la norme et ne sauvegardent pas les registres x0 à x17 ce qui peut poser problème.
+
+Ensuite nous modifions la gestion des événements car nous avons plusieurs événements à traiter : passage de la souris sur le bouton, sortie de la souris du bouton, clic sur le bouton, appui sur la touche q pour terminer proprement le programme.
+
+Cette gestion fait appel à une structure événement qui est différente pour chaque événement.
+Ici, nous utilisons le minimum des informations de la structure.
+
+La gestion de la touche nécessite l’appel à la fonction XlookupString pour déterminer si la touche est un caractère ou une autre clé du clavier.
+Pour terminer le programme, vous devez faire apparaître le clavier en cliquant sur le – en haut de la fenêtre du Xserver et en choisissant l’option keyboard. Dès que le clavier apparaît vous tapez sur q et sur <Entrée> et le programme doit se terminer.
+
