@@ -1,6 +1,10 @@
 # Chapitre  1 : installation des outils.
 
-Préalables : il vous faut connaître le minimum d’un environnement linux pour pouvoir travailler correctement :
+Préalables : 
+
+Avoir un smartphone ou une tablette avec au minimum la version 7 d'Android (ou supérieure).
+
+il vous faut connaître le minimum d’un environnement linux pour pouvoir travailler correctement :
 
 ```
       Créer et naviguer dans les répertoires.
@@ -13,6 +17,8 @@ Préalables : il vous faut connaître le minimum d’un environnement linux pou
 ```
 
 Il faut commencer par installer l’application Termux sur le smarphone ou la tablette disponible sur le Play Store ou sur le site https://termux.com/
+
+(remarque 2021 : termux indique qu'il n'y aura pas de maj de la version sur le Play Store et qu'il faut télécharger l'application sur FDroid).
 
 Sur le site (en anglais) récupérer et ou lire la documentation.
 
