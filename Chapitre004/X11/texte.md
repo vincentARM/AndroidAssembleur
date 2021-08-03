@@ -155,4 +155,5 @@ Au moment des tests, mon smarphone installe une nouvelle version 11 d’Android.
 Après plusieurs jours de recherche, de tests, de modification de paramètres, j’arrive à faire fonctionner le programme en ajoutant seulement la directive -z noexecstack pour le linker !!
 
 Voici l’image obtenue :
+
 ![Fougere64](https://github.com/vincentARM/AndroidAssembleur/blob/main/Chapitre004/X11/fougere64_X%20Server.jpg)
