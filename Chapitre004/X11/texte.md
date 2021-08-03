@@ -139,3 +139,20 @@ Ici, nous utilisons le minimum des informations de la structure.
 La gestion de la touche nécessite l’appel à la fonction XlookupString pour déterminer si la touche est un caractère ou une autre clé du clavier.
 Pour terminer le programme, vous devez faire apparaître le clavier en cliquant sur le – en haut de la fenêtre du Xserver et en choisissant l’option keyboard. Dès que le clavier apparaît vous tapez sur q et sur <Entrée> et le programme doit se terminer.
 
+Pour terminer cette section, voici un dernier programme utilisant X11 et effectuant des calculs avec des nombres en virgule flottante. 
+
+Le programme fougere64.s affiche l’image de la fougère de Barnsley (voir sur Wikipédia le détail des calculs) dans une couleur verte.
+
+Le programme reprend l’affichage d’une fenêtre vu dans les exemples précédents, utilise les fonctions X11 pour récupérer les couleurs et créer un contexte graphique adapté.
+
+Ensuite dans la routine dessinerFougere, nous effectuons une boucle qui va dessiner 400000 pixels en vert suivant les calculs effectués en virgule flottante (voir les commentaires dans le programme).
+Les dernières instructions de la boucle, permettent le cadrage de la fougère dans la fenêtre et sont donc à modifier en fonction de votre propre écran.
+
+La gestion des événements ne prend en compte que l’appui sur la touche q pour terminer proprement le programme.
+
+Au moment des tests, mon smarphone installe une nouvelle version 11 d’Android. Et le programme fougere64 ne fonctionne plus affichant toujours le message serveur X non trouvé.
+
+Après plusieurs jours de recherche, de tests, de modification de paramètres, j’arrive à faire fonctionner le programme en ajoutant seulement la directive -z noexecstack pour le linker !!
+
+Voici l’image obtenue :
+
