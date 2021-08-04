@@ -57,7 +57,8 @@ Dans le programme fougere64Opt1.s  nous chargeons les constantes qVal1 et qVal2 
  ```asm
     mov x6,#93
     cmp x0,x6
-    ```
+ ```
+    
 Puis nous remarquons que nous chargeons la constante dConst2 2 fois et donc nous modifions le programme fougere64Opt2.s pour la charger dans le registre d6 en dehors de la boucle.
 
 Voici les nouveaux temps : 62ms 61ms 63ms 61ms 57ms soit une moyenne de 60,8
