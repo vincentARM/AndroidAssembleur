@@ -11,9 +11,9 @@ Il ne me reste donc plus qu’à mesurer le temps d’exécution d’une routine
 Le programme chrono64.s contient 2 routines, une pour récupérer le temps de début avec l’appel système gettimeofday (debutChrono), l’autre pour récupérer le temps final, calculer la différence entre les 2 temps et imprimer le résultat (stopChrono).
 
 L’exécution d’une simple boucle 1 342 177 279 (0x4FFFFFFF) fois donne des temps différents : 907 millisecondes puis 904 puis 905 puis 879. 
-Il sera donc nécessaire de lancer plusieurs fois les tests et de voir si la moyenne s »améliore ?
+Il sera donc nécessaire de lancer plusieurs fois les tests et de voir si la moyenne s'améliore.
 
-Ensuite pour optimiser, il nous faut connaître quels sont les instructions les plus coûteuses afin d’en réduire le nombre ou de les remplacer par des instructions moins coûteuses. 
+Ensuite pour optimiser, il nous faut connaître quelles sont les instructions les plus coûteuses afin d’en réduire le nombre ou de les remplacer par des instructions moins coûteuses. 
 Dans la documentation ARM, nous trouvons pour chaque type de processeurs le nombre de cycles de chaque instruction mais attention cela est à relativiser car les processeurs ARM utilisent un pipeline pour traiter plusieurs instructions à la fois (voir ces notions sur Internet)
 
 Donc en gros, nous pouvons avoir ce classement du plus coûteux au plus rapide :
@@ -67,6 +67,8 @@ Il ne nous reste plus qu’à charger les autres constantes dans des registres h
 65ms 60ms 58ms 62ms 57ms  soit une moyenne de 60,4  donc un gain faible
 
 Compte tenu de l’entrelacement des calculs de X et Y, il n’est pas facile d’optimiser le pipeline du processeur.
-On pourrait modifier la division par 100 et le calcul du reste car il existe des méthodes plus rapides de division par une constante mais la complexité supplémentaire en vaut-elle le coût.
+On pourrait modifier la division par 100 et le calcul du reste car il existe des méthodes plus rapides de division par une constante mais la complexité supplémentaire en vaut-elle le coût ?
 
 Nous avons au total un gain de (68 – 60,4) /68 soit 11 %
+
+Remarque : nous n'avons sauvegardé aucun registre float !!!
