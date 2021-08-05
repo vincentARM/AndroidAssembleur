@@ -32,3 +32,18 @@ Les registres x18 à x28 et le registre lr sont sauvegardés.
 La partie basse de chaque registre cad les 32 bits de poids faible peuvent être utilisés avec les noms w0 à w29.
 
 Le registre spécial contenant 0 peut être manipulé en 32 bits avec le nom wzr.
+
+L'instruction principale de manipulation d'un registre est l'instruction mov qui soit met une valeur immediate dans le registre
+```asm
+mov x0,100
+```
+soit qui copie la valeur d'un registre dans un autre :
+```asm
+mov x0,x1
+```
+Attention : c'est la valeur de x1 qui est copiée dans x0.
+
+Remarque : en assembleur 64 bits le caractère # n'est pas obligatoire devant une valeur immediate.
+           La valeur maximum est limitée à 0xFFFF.
+           
+
