@@ -1,5 +1,7 @@
 ### Programmation ARM 64 bits.
 
+Ce petit cours est basé sur l'assembleur ARM 64 bits qui sera assemblé par as (ou gas = gnu assembly). La syntaxe peut être différente pour d'autres types d'assembleur.
+
 Telechargez la carte de référence des instructions sur ce site :  https://courses.cs.washington.edu/courses/cse469/19wi/arm64.pdf
 
 Voir aussi : https://developer.arm.com/documentation/100076/0100/a64-instruction-set-reference
