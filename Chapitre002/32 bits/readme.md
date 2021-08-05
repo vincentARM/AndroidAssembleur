@@ -42,7 +42,7 @@ Ici nous mettons dans ce registre l’adresse du message en mémoire, adresse qu
 
 Mais vous allez me dire : "Ce n’est pas vrai !! j’ai vu dans des exemples de programmes arm que nous pouvions accéder directement à la variable avec l’instruction ldr r0,=szMessage ".
 
-En effet car ces 2 instructions ldr ne sont pas véritablement des instructions de base du processeur car celui ci ne connaît qu’une seule instruction de chargement en mémoire de format ldr rx,[ry,(rz/imm]. 
+En effet car ces 2 instructions ldr ne sont pas véritablement des instructions de base du processeur car celui ci ne connaît qu’une seule instruction de chargement en mémoire de format ldr rx,[ry,(rz/imm)]. 
 
 C’est encore le compilateur qui va transformer ces instructions. Dans le cas de ldr r0,=szMessage , il va créer une zone mémoire en fin de code avec l’adresse de szMessage, zone qui remplace celle que j’ai déclarée iadrszMessage mais ça revient au même !!
 
@@ -68,14 +68,14 @@ La fonction write utilisée nécessite de lui passer l’adresse du message en m
 Nous allons donc commencer par calculer cette longueur et pour cela nous initialisons le registre r2 à zéro, registre qui servira de compteur des octets de la chaîne.
 Nous lisons le premier octet de la chaîne  dans le registre r1 grâce à l’instruction ldrb r1,[r0,r2], r0 contenant l’adresse du début de la chaîne , adresse que nous avons mis avant l’appel de la routine et r2 contenant l’indice de l’octet dans la chaîne et égal à  0.
 
-Puis nous comparons la valeur du  registre r1 avec zéro et si cet égal c’est que nous avons trouvé le zero indiquant la dfin de chaîne et donc nous avons terminé le calcul donc nous sautons à l’étiquette suivante avec l’instruction beq 2f  sinon , nous augmentons le registre r2 de 1 et nous bouclons à l’étiquete précédente avec l’instruction b 1b.
+Puis nous comparons la valeur du  registre r1 avec zéro et si c'est égal, c’est que nous avons trouvé le zero indiquant la fin de chaîne et donc nous avons terminé le calcul donc nous sautons à l’étiquette suivante avec l’instruction beq 2f  sinon , nous augmentons le registre r2 de 1 et nous bouclons à l’étiquette précédente avec l’instruction b 1b.
 L’instruction beq 2f signifie Branch if equal (saut si égal) à l’étiquette 2 forward (suivante) et l’instruction b 1b signifie Branch (saut sans condition) à l’étiquette 1 before (précédente) : c’est limpide non ?
 
-Les étiquettes numériques avec les lettres f et b sont une astuce pour faciliter la programmation des sauts. J’aurais pu utiliser des noms classiques comme début : et fin : et les instructions auraient été : beq fin et b debut.
+Les étiquettes numériques avec les lettres f et b sont une astuce pour faciliter la programmation des sauts. J’aurais pu utiliser des noms classiques comme début: et fin: et les instructions auraient été : beq fin et b debut.
 
 À L’étiquette 2 nous avons donc le registre r2 qui contient le nombre d’octets qui composent le message et il nous reste plus qu’à préparer les paramètres pour appeler la fonction write. Nous mettons dans r1, l’adresse du message contenue dans r0, puis dans r0, une constante qui indique d’écrire dans la console de sortie standard de Linux puis r2 contiendra la longueur et r7 le code fonction (ici 4) et nous appelons le système d’exploitation avec svc comme avec la fonction EXIT vue plus haut.
 
-Nous terminons la routine en restaurant le même nombre de registres et dans le même ordre avec l’instruction pop {r0,r1,r2,r7,lr}. Ceci est très important, il faut toujours avoir une pile identique après l’appel à une routine ou fonction.
+Nous terminons la routine en restaurant le même nombre de registres et dans le même ordre avec l’instruction pop {r0,r1,r2,r7,lr}. Ceci est très important, il faut toujours avoir une adresse de pile identique après l’appel à une routine ou fonction.
 
 Puis nous retournons au programme principal avec l’instruction bx lr qui signifie de sauter à l’adresse indiquée dans le registre lr et en effet, je vous ai dit plus haut que l’adresse de retour était stockée dans ce registre lors de l’appel de la routine.
 
@@ -83,9 +83,9 @@ Ouf tout est parfait !!
 
 Si vous avez tout suivi, vous avez compris 90 % d’un programme assembleur. Vous pouvez donc pour vous entraîner, modifier le message, ou afficher un autre message ou plusieurs, enlever le caractère \n etc.
 
-Vous avez encore bien sûr de nombreuses interrogations  sur ce programme !! 
+Vous avez encore bien sûr de nombreuses interrogations sur ce programme !! 
 
-Par exemple vous vous demandez comment nous connaissons les codes fonctions des appels système, et les valeurs a passer dans les paramètres. Heureusement sur Internet, nous trouvons toute la documentation nécessaire : il suffit de taper appel systeme linux write (ou system call linux write) pour trouver plein de sites (mais souvent en anglais) comme celui ci par exemple :
+Par exemple vous vous demandez comment nous connaissons les codes fonctions des appels système, et les valeurs à passer dans les paramètres. Heureusement sur Internet, nous trouvons toute la documentation nécessaire : il suffit de taper appel systeme linux write (ou system call linux write) pour trouver plein de sites (mais souvent en anglais) comme celui ci par exemple :
 http://www.lxhp.in-berlin.de/lhpsysc0.html
 
 Mais vous pouvez trouver les codes sur votre console termux avec la commande :
