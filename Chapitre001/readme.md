@@ -126,5 +126,7 @@ Une autre solution consiste à utiliser l’environnement graphique X11 et à in
 Remarque : je pensais arrêter cette présentation au seul premier programme, mais emporté par mon élan, j'ai ecris un semblant de cours de programmation sur l'assembleur ARM. Ce cours écrit presqu'en temps réel est donc plein d'approximations ou même d'erreurs !! 
 N 'hésitez pas à me les signaler.
 
+ La partie 64 bits est plus complète que la partie 32 bits car je suppose que beaucoup de smatphones actuels disposent de processeurs arm 64 bits.
+
 Chaque chapitre est accompagné de petits programmes, n'hesitez pas à les modifier (améliorer) pour vous perfectionner en assembleur.
       
