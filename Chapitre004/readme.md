@@ -6,6 +6,8 @@ Telechargez la carte de référence des instructions sur ce site :  https://cour
 
 Voir aussi : https://developer.arm.com/documentation/100076/0100/a64-instruction-set-reference
 
+Sur ce site, vous trouverez toute la documentation des architectures ARM, de chaque type de processeur, et du détail complet de chaque instruction (but in english !!)
+
 Ce cours n'aborde pas complétement les aspects théoriques de la programmation en assembleur 64 bits. Il se veut surtout pratique en montrant des exemples dans de nombreux petits programmes. 
 
 N'hésitez pas à les modifier pour voir les consèquences ou pour vérifier si ce que j'ai écrit est vrai !!
