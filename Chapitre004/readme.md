@@ -8,7 +8,7 @@ Ce cours n'aborde pas complétement les aspects théoriques de la programmation 
 
 N'hésitez pas à les modifier pour voir les consèquences ou pour vérifier si ce que j'ai écrit est vrai !!
 
-Remarques :  Il est difficile d'expliquer les premiers programmes car cela necessite de connaitre tous les concepts de l'Assembleur.
+Remarque :  Il est difficile d'expliquer les premiers programmes car cela necessite de connaitre tous les concepts de l'Assembleur.
 
 Si une partie d"une routine vous parait peu claire, n'hésitez pas à attendre quelques chapitres pour y revenir comme par exemple les accès mémoire.
 
