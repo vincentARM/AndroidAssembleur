@@ -12,7 +12,7 @@ Pour un processeur ARM 32 bits, nous avons 16 registres de ce type :
  ```
 Les Registres d'usages généraux peuvent être utilisés pour toutes les opérations.
 
-Le registre de pile sp peut être modifié, le registre lr ne doit l'être qu'avec prudence !!. Le registre pc ne peut être modifié que par l'instruction pop.
+Le registre de pile sp peut être modifié, le registre lr ne doit l'être qu'avec prudence !!. Le registre pc ne peut être modifié directement que par l'instruction pop. Il est modifié indirectement par les instructions de saut et de branchement.
 
 Dans les 13 registres généraux, certains servent aux passages des paramètres lors d’appel de fonctions de bibliothèques externes : il s’agit des registres r0 à r3 : ces registres ne sont pas sauvegardés par ces fonctions (y compris lors des appels à Linux).
 
